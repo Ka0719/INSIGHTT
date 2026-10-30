@@ -2,8 +2,8 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INSIGHT - Bật mode focus, cân mọi deadline</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>INSIGHT – Soi Thấu Tâm Trí, Bật Mood Siêu Focus</title>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* --- DESIGN TOKENS (Pastel/Minimalist Theme) --- */
+        /* --- DESIGN TOKENS --- */
         :root {
             --bg-main: #FAFAF9;
             --bg-card: #FFFFFF;
@@ -31,9 +31,15 @@
             --radius-md: 16px;
             --radius-sm: 8px;
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+            /* Dynamic Psychological Background Gradient Stops */
+            --mesh-c1: rgba(169, 209, 186, 0.75);
+            --mesh-c2: rgba(242, 185, 179, 0.60);
+            --mesh-c3: rgba(195, 177, 225, 0.50);
+            --mesh-c4: rgba(174, 198, 207, 0.60);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body {
             font-family: 'Be Vietnam Pro', sans-serif;
@@ -41,6 +47,7 @@
             color: var(--color-text);
             display: flex;
             height: 100vh;
+            height: 100dvh;
             overflow: hidden;
             line-height: 1.6;
         }
@@ -81,7 +88,7 @@
             font-size: 1.2rem;
             color: var(--color-text-light);
             margin-bottom: 3rem;
-            font-weight: 400;
+            font-weight: 500;
         }
         .welcome-btn {
             font-size: 1.2rem;
@@ -117,7 +124,7 @@
 
         .logo-area { margin-bottom: 3rem; }
         .logo-title { font-family: 'Playfair Display', serif; font-size: 2.5rem; letter-spacing: 2px; color: var(--color-text); font-weight: 700; }
-        .logo-slogan { font-size: 0.85rem; color: var(--color-text-light); margin-top: 0.5rem; }
+        .logo-slogan { font-size: 0.88rem; color: var(--color-text-light); margin-top: 0.5rem; font-weight: 500; }
 
         .nav-menu { flex: 1; display: flex; flex-direction: column; gap: 0.8rem; }
         
@@ -144,7 +151,6 @@
             position: relative;
         }
 
-        /* Views (SPA switching) */
         .view-section {
             display: none;
             animation: fadeIn 0.4s ease-out forwards;
@@ -164,9 +170,9 @@
             box-shadow: var(--shadow-md);
             margin-bottom: 2rem;
         }
-        .section-header { margin-bottom: 1.5rem; }
-        .section-header h2 { font-size: 2rem; margin-bottom: 0.5rem; }
-        .section-header p { color: var(--color-text-light); }
+        .section-header { margin-bottom: 1.75rem; }
+        .section-header h2 { font-size: 2rem; margin-bottom: 0.4rem; }
+        .section-header p { color: var(--color-text-light); font-size: 1rem; }
         
         button.primary-btn {
             background-color: var(--color-text);
@@ -187,13 +193,17 @@
             background-color: transparent;
             color: var(--color-text-light);
             border: 1px solid #ddd;
-            padding: 0.8rem 2rem;
+            padding: 0.8rem 1.6rem;
             border-radius: 50px;
             font-family: inherit;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 500;
             cursor: pointer;
             transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
         }
         button.secondary-btn:hover {
             background-color: #f5f5f5;
@@ -222,9 +232,24 @@
         .mood-btn:hover, .mood-btn.selected { filter: grayscale(0%); opacity: 1; transform: scale(1.2); }
         .mood-msg { text-align: center; height: 30px; color: var(--color-text-light); font-weight: 500; }
 
-        .amps-intro { background-color: rgba(212, 234, 221, 0.3); padding: 1.5rem; border-radius: var(--radius-md); margin-bottom: 2rem; border-left: 4px solid var(--color-mint-dark); }
-        .question-group { margin-bottom: 1.5rem; }
-        .question-text { font-weight: 500; margin-bottom: 0.5rem; }
+        /* Glass AMPS Intro */
+        .amps-intro { 
+            background: rgba(212, 234, 221, 0.38); 
+            -webkit-backdrop-filter: blur(16px) saturate(160%);
+            backdrop-filter: blur(16px) saturate(160%);
+            padding: 1.35rem 1.6rem; 
+            border-radius: var(--radius-md); 
+            margin: 1.25rem 0 1.8rem 0; 
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            border-left: 4px solid var(--color-mint-dark); 
+            box-shadow: 0 4px 18px rgba(44, 62, 80, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+        }
+        .amps-intro p { margin: 0; line-height: 1.6; }
+        .amps-intro p strong { font-weight: 600; font-size: 1.02rem; }
+        .amps-intro p + p { margin-top: 0.45rem; font-size: 0.94rem; color: var(--color-text-light); }
+
+        .question-group { margin-bottom: 1.6rem; }
+        .question-text { font-weight: 500; margin-bottom: 0.6rem; }
         
         .question-anim { opacity: 0; animation: fadeInQuestion 0.5s ease-out forwards; }
         @keyframes fadeInQuestion {
@@ -240,65 +265,145 @@
             background: var(--color-accent); cursor: pointer;
             -webkit-appearance: none; margin-top: -8px; box-shadow: var(--shadow-sm);
         }
-        .slider-labels { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--color-text-light); margin-top: 5px; }
+        .slider-labels { display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--color-text-light); margin-top: 5px; }
         
         #amps-result { display: none; margin-top: 1.5rem; padding: 1.5rem; border-radius: var(--radius-md); font-weight: 500; text-align: center; }
         .result-high { background-color: var(--color-peach); color: #c0392b; }
         .result-medium { background-color: #FFF3CD; color: #856404; }
         .result-low { background-color: var(--color-mint); color: #27ae60; }
 
-        /* --- 2. PLAN VIEW --- */
-        .plan-container { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-        .task-input-group { display: flex; gap: 1rem; margin-bottom: 1rem; }
+        /* --- 2. PLAN VIEW ENHANCED --- */
+        .plan-container { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 2rem; align-items: start; }
+        
+        /* Time & Routine Setting Card */
+        .sub-config-box {
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: var(--radius-md);
+            padding: 1.2rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(44, 62, 80, 0.08);
+        }
+        .sub-config-title {
+            font-size: 0.98rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .pill-list { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem; }
+        .pill-badge {
+            background: rgba(44, 62, 80, 0.07);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .pill-badge i { cursor: pointer; color: #c0392b; }
+        
+        .task-input-group { display: flex; gap: 0.8rem; margin-bottom: 0.8rem; }
         .task-input-group input, .task-input-group select {
             padding: 0.8rem 1rem; border: 1px solid #ddd; border-radius: var(--radius-sm);
-            font-family: inherit; font-size: 1rem; outline: none;
+            font-family: inherit; font-size: 0.95rem; outline: none;
         }
         .task-input-group input[type="text"] { flex: 1; }
+        
+        .extra-fields-toggle {
+            font-size: 0.88rem;
+            color: var(--color-accent);
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+        }
+        .extra-fields-box {
+            display: none;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: rgba(44, 62, 80, 0.03);
+            border-radius: var(--radius-sm);
+        }
+        .extra-fields-box.open { display: grid; }
+        .extra-fields-box label { font-size: 0.8rem; color: var(--color-text-light); font-weight: 500; margin-bottom: 2px; display: block; }
+        .extra-fields-box select, .extra-fields-box input { width: 100%; padding: 0.5rem 0.6rem; font-size: 0.88rem; border-radius: 8px; border: 1px solid #ccc; font-family: inherit; }
+
         .task-list { list-style: none; margin-top: 1.5rem; }
         
         .task-item {
-            background-color: var(--bg-main); padding: 0.8rem 1rem; border-radius: var(--radius-sm); margin-bottom: 0.8rem;
-            display: flex; justify-content: space-between; align-items: center; border-left: 3px solid var(--color-text);
+            background-color: var(--bg-main); padding: 0.9rem 1.1rem; border-radius: var(--radius-sm); margin-bottom: 0.8rem;
+            display: flex; justify-content: space-between; align-items: center; border-left: 4px solid var(--color-text);
+            transition: var(--transition);
         }
-        .task-info { display: flex; align-items: center; gap: 0.8rem; flex: 1; }
-        .task-time-badge { background: #e0e6ed; padding: 3px 8px; border-radius: 12px; font-size: 0.8rem; color: #444; font-weight: 500; }
-        .task-actions { display: flex; gap: 0.5rem; }
+        .task-item.completed { opacity: 0.6; border-left-color: #27ae60 !important; background: rgba(39, 174, 96, 0.05); }
+        .task-item.completed .task-title { text-decoration: line-through; color: var(--color-text-light); }
+        .task-info { display: flex; align-items: center; gap: 0.8rem; flex: 1; flex-wrap: wrap; }
+        .task-checkbox { width: 18px; height: 18px; cursor: pointer; accent-color: #27ae60; }
+        .task-time-badge { background: #e0e6ed; padding: 3px 8px; border-radius: 12px; font-size: 0.78rem; color: #444; font-weight: 500; }
+        .tag-badge { padding: 2px 7px; border-radius: 8px; font-size: 0.75rem; font-weight: 500; }
+        .tag-priority-high { background: #fadcd9; color: #c0392b; }
+        .tag-priority-med { background: #fff3cd; color: #856404; }
+        .tag-priority-low { background: #d4eadd; color: #27ae60; }
+        
+        .task-actions { display: flex; gap: 0.4rem; }
         .action-btn {
             background: transparent; border: none; cursor: pointer; color: var(--color-text-light);
-            width: 32px; height: 32px; border-radius: 4px; display: flex; align-items: center; justify-content: center;
+            width: 32px; height: 32px; border-radius: 6px; display: flex; align-items: center; justify-content: center;
             transition: var(--transition);
         }
         .action-btn:hover { background: rgba(0,0,0,0.05); color: var(--color-text); }
         .action-btn.delete-btn:hover { background: #FADCD9; color: #c0392b; }
         
-        .schedule-visualizer { background-color: var(--color-beige); padding: 1.5rem; border-radius: var(--radius-lg); height: 100%; }
-        .timeline { position: relative; padding-left: 1.5rem; border-left: 2px solid rgba(0,0,0,0.1); }
-        .timeline-item { position: relative; padding-bottom: 1rem; }
+        .schedule-visualizer { background-color: var(--color-beige); padding: 1.8rem; border-radius: var(--radius-lg); height: 100%; }
+        .timeline { position: relative; padding-left: 1.5rem; border-left: 2px solid rgba(0,0,0,0.12); margin-top: 1.2rem; }
+        .timeline-item { position: relative; padding-bottom: 1.2rem; font-size: 0.95rem; }
         .timeline-item::before {
-            content: ''; position: absolute; left: -1.8rem; top: 0.3rem; width: 12px; height: 12px;
+            content: ''; position: absolute; left: -1.82rem; top: 0.35rem; width: 13px; height: 13px;
             border-radius: 50%; background: var(--color-text); border: 2px solid var(--color-beige);
         }
-        .timeline-break::before { background: var(--color-peach-dark); }
-        .timeline-break { color: var(--color-text-light); font-style: italic; font-size: 0.9rem; }
+        .timeline-fixed::before { background: #e67e22; }
+        .timeline-break::before { background: var(--color-mint-dark); }
+        .timeline-break { color: var(--color-text-light); font-style: italic; font-size: 0.88rem; }
+        .unscheduled-box {
+            margin-top: 1.2rem;
+            padding: 1rem;
+            border-radius: var(--radius-sm);
+            background: rgba(242, 185, 179, 0.25);
+            border-left: 3px solid #c0392b;
+            font-size: 0.88rem;
+        }
 
         /* --- 3. LEARN VIEW --- */
-        .learn-view { text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; padding-bottom: 2rem;}
+        .learn-view { 
+            text-align: center; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            width: 100%;
+            padding-bottom: 2rem;
+        }
         
         .learn-cards-container {
-            display: flex;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             gap: 1.5rem;
-            margin-bottom: 2.5rem;
+            margin-bottom: 2.8rem;
             width: 100%;
-            max-width: 750px;
+            max-width: 820px;
         }
         .learn-card {
             background: var(--bg-card);
             border-radius: var(--radius-md);
-            padding: 1.2rem;
+            padding: 1.3rem;
             box-shadow: var(--shadow-sm);
             cursor: pointer;
-            flex: 1;
             border: 2px solid transparent;
             transition: var(--transition);
             position: relative;
@@ -315,23 +420,23 @@
         }
         .learn-card.active .learn-card-header { color: var(--color-text); }
         
-        .info-btn { color: var(--color-accent); cursor: pointer; padding: 5px; font-size: 1.2rem; transition: var(--transition); }
+        .info-btn { color: var(--color-accent); cursor: pointer; padding: 5px; font-size: 1.15rem; transition: var(--transition); }
         .info-btn:hover { color: var(--color-text); transform: scale(1.1); }
         
         .learn-card-info {
             display: none; margin-top: 1rem; font-size: 0.85rem; color: var(--color-text-light);
-            border-top: 1px solid #eee; padding-top: 0.8rem; line-height: 1.5;
+            border-top: 1px solid rgba(44, 62, 80, 0.08); padding-top: 0.8rem; line-height: 1.5;
         }
         .learn-card-info.show { display: block; animation: fadeIn 0.3s ease-out forwards; }
         .learn-card-info b { color: var(--color-text); }
 
-        /* Digital Clock Wrapper */
+        /* Digital Clock */
         .digital-clock-wrapper {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 15px;
-            margin-bottom: 1.2rem;
+            gap: 16px;
+            margin-bottom: 2rem; /* Tăng khoảng cách hợp lý xuống đồng hồ kim */
             height: 60px;
         }
 
@@ -358,14 +463,10 @@
             align-items: center;
             justify-content: center;
         }
+        #btn-toggle-digital:hover { background: rgba(0,0,0,0.06); color: var(--color-text); }
 
-        #btn-toggle-digital:hover {
-            background: rgba(0,0,0,0.06);
-            color: var(--color-text);
-        }
-
-        /* Analog Clock CSS */
-        .clock-container { position: relative; margin-bottom: 1rem; }
+        /* Analog Clock */
+        .clock-container { position: relative; margin-bottom: 2.5rem; }
         
         .analog-clock {
             width: 260px; height: 260px; border-radius: 50%;
@@ -412,9 +513,7 @@
         }
         .breathe-wave-svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
         
-        .breathe-dot-wrapper {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-        }
+        .breathe-dot-wrapper { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
         .breathe-dot {
             position: absolute; width: 16px; height: 16px; border-radius: 50%;
             background-color: var(--color-text);
@@ -422,18 +521,8 @@
             margin-left: -8px; margin-top: -8px;
         }
 
-        @keyframes breathMoveX {
-            0% { left: 7.1%; }       
-            33.33% { left: 35.7%; }  
-            66.66% { left: 64.3%; }  
-            100% { left: 92.8%; }    
-        }
-        @keyframes breathMoveY {
-            0% { top: 90%; animation-timing-function: ease-in-out; }     
-            33.33% { top: 10%; animation-timing-function: linear; }      
-            66.66% { top: 10%; animation-timing-function: ease-in-out; } 
-            100% { top: 90%; }                                           
-        }
+        @keyframes breathMoveX { 0% { left: 7.1%; } 33.33% { left: 35.7%; } 66.66% { left: 64.3%; } 100% { left: 92.8%; } }
+        @keyframes breathMoveY { 0% { top: 90%; animation-timing-function: ease-in-out; } 33.33% { top: 10%; animation-timing-function: linear; } 66.66% { top: 10%; animation-timing-function: ease-in-out; } 100% { top: 90%; } }
 
         .breathe-text { font-weight: 500; color: var(--color-text-light); text-align: center; font-size: 1rem; margin-bottom: 2rem; height: 24px; }
 
@@ -472,23 +561,446 @@
             100% { transform: scale(0) translateY(400px) rotate(20deg); opacity: 0; border-radius: 50%; }
         }
         
-        .affirmation-overlay { position: absolute; bottom: 20px; left: 0; width: 100%; text-align: center; color: rgba(0,0,0,0.3); font-style: italic; pointer-events: none; transition: opacity 0.3s; }
+        .affirmation-overlay { position: absolute; bottom: 20px; left: 0; width: 100%; text-align: center; color: var(--color-text-light); font-style: italic; pointer-events: none; transition: opacity 0.3s; }
+    
+        /* =====================================================================
+           iOS GLASS LAYER & SETTINGS FIX
+           ===================================================================== */
+        :root {
+            --font-ui: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+            --glass-bg: rgba(255, 255, 255, 0.55);
+            --glass-bg-strong: rgba(255, 255, 255, 0.72);
+            --glass-border: rgba(255, 255, 255, 0.65);
+            --glass-blur: blur(24px) saturate(170%);
+            --glass-shadow: 0 8px 32px rgba(44, 62, 80, 0.08), 0 1px 2px rgba(44, 62, 80, 0.04);
+            --glass-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.85), inset 0 -1px 0 rgba(255, 255, 255, 0.25);
+            --ease-ios: cubic-bezier(0.22, 1, 0.36, 1);
+            --radius-lg: 28px;
+            --radius-md: 18px;
+            --radius-sm: 12px;
+            --transition: all 0.3s var(--ease-ios);
+        }
 
+        body {
+            font-family: var(--font-ui);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            line-height: 1.55;
+        }
+        h1, h2, h3 { letter-spacing: -0.01em; line-height: 1.2; }
+        h3 { font-family: var(--font-ui); font-weight: 600; font-size: 1.15rem; letter-spacing: -0.015em; }
+        .section-header h2 { font-size: clamp(1.7rem, 1.2rem + 1.6vw, 2.2rem); letter-spacing: -0.02em; }
+        .logo-slogan, .welcome-slogan { line-height: 1.45; }
+        button, input, select { font-family: var(--font-ui); }
+
+        body::before {
+            content: ''; position: fixed; inset: -10%; z-index: -1; pointer-events: none;
+            background:
+                radial-gradient(42% 42% at 14% 18%, var(--mesh-c1) 0%, transparent 70%),
+                radial-gradient(38% 38% at 86% 14%, var(--mesh-c2) 0%, transparent 70%),
+                radial-gradient(45% 45% at 76% 86%, var(--mesh-c3) 0%, transparent 70%),
+                radial-gradient(36% 36% at 20% 84%, var(--mesh-c4) 0%, transparent 70%);
+            filter: blur(24px);
+            animation: meshDrift 30s ease-in-out infinite alternate;
+            transition: background 1s ease-in-out;
+        }
+        @keyframes meshDrift {
+            from { transform: translate3d(0, 0, 0) scale(1); }
+            to   { transform: translate3d(2%, -2%, 0) scale(1.05); }
+        }
+
+        .sidebar {
+            background: var(--glass-bg);
+            -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur);
+            border-right: 1px solid var(--glass-border);
+            box-shadow: var(--glass-highlight), 4px 0 30px rgba(44, 62, 80, 0.04);
+        }
+        .nav-item { border-radius: var(--radius-md); }
+        .nav-item:hover { background: rgba(255, 255, 255, 0.45); }
+        .nav-item.active {
+            background: var(--glass-bg-strong);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-highlight), 0 4px 14px rgba(44, 62, 80, 0.08);
+        }
+        .nav-item:active { transform: scale(0.97); }
+
+        .main-content { z-index: 1; scroll-behavior: smooth; -webkit-overflow-scrolling: touch; }
+        .main-content::-webkit-scrollbar { width: 8px; }
+        .main-content::-webkit-scrollbar-thumb { background: rgba(44, 62, 80, 0.15); border-radius: 8px; }
+
+        .card, .doodling-area, .learn-card, .schedule-visualizer, .breathing-widget {
+            -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow), var(--glass-highlight);
+        }
+        .card, .learn-card, .doodling-area { background: var(--glass-bg); }
+        .card { padding: 2rem 2.2rem; }
+        .schedule-visualizer { background: rgba(245, 239, 235, 0.5); }
+        .breathing-widget { box-shadow: var(--glass-shadow), var(--glass-highlight); }
+        .doodle-header { background: rgba(255, 255, 255, 0.45); border-bottom: 1px solid rgba(255, 255, 255, 0.7); }
+        #doodle-canvas { background-color: rgba(255, 255, 255, 0.35); }
+
+        .learn-card.active { border-color: rgba(44, 62, 80, 0.55); background: var(--glass-bg-strong); }
+        .learn-card:hover { transform: translateY(-3px); }
+
+        .quote-banner {
+            background: linear-gradient(135deg, rgba(212, 234, 221, 0.75), rgba(250, 220, 217, 0.75));
+            -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow), var(--glass-highlight);
+            font-size: 1.02rem; line-height: 1.6;
+        }
+
+        button.primary-btn, .welcome-btn {
+            background: linear-gradient(180deg, #3a4f63 0%, var(--color-text) 100%);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22), 0 6px 16px rgba(44, 62, 80, 0.22);
+            letter-spacing: 0.005em;
+        }
+        button.primary-btn:hover, .welcome-btn:hover { transform: translateY(-2px); opacity: 1; filter: brightness(1.08); }
+        button.primary-btn:active, .welcome-btn:active, button.secondary-btn:active { transform: scale(0.97) !important; }
+        button.secondary-btn {
+            background: rgba(255, 255, 255, 0.5); border: 1px solid var(--glass-border);
+            -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+            box-shadow: var(--glass-highlight);
+        }
+        button.secondary-btn:hover { background: rgba(255, 255, 255, 0.8); border-color: rgba(255, 255, 255, 0.9); }
+        .sound-btn, .ambient-card {
+            -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+        }
+        .ambient-card.active { border-color: var(--color-mint-dark); }
+        .sound-btn.active { border-color: transparent; }
+        #btn-take-break { background: linear-gradient(180deg, #b9dcc8, var(--color-mint-dark)) !important; box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 6px 16px rgba(169, 209, 186, 0.45); }
+
+        .task-input-group input, .task-input-group select, #schedule-start-time, #schedule-end-time {
+            background: rgba(255, 255, 255, 0.6) !important;
+            border: 1px solid rgba(44, 62, 80, 0.10) !important;
+            border-radius: 14px !important;
+            padding: 0.8rem 1rem;
+            transition: var(--transition);
+        }
+        .task-input-group input:focus, .task-input-group select:focus, #schedule-start-time:focus, #schedule-end-time:focus {
+            background: #fff !important;
+            border-color: var(--color-mint-dark) !important;
+            box-shadow: 0 0 0 4px rgba(169, 209, 186, 0.35);
+        }
+        #schedule-controls {
+            background: rgba(255, 255, 255, 0.45) !important;
+            border: 1px solid var(--glass-border) !important;
+            border-radius: var(--radius-md) !important;
+        }
+
+        .task-item {
+            background: rgba(255, 255, 255, 0.55);
+            border: 1px solid var(--glass-border);
+            border-left: 4px solid var(--color-text);
+            border-radius: 14px;
+            box-shadow: var(--glass-highlight);
+        }
+        .task-time-badge { background: rgba(44, 62, 80, 0.08); }
+        .timeline-item::before { border-color: rgba(245, 239, 235, 0.9); }
+
+        .analog-clock {
+            background: rgba(255, 255, 255, 0.45);
+            -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur);
+            box-shadow: var(--glass-highlight), inset 0 0 30px rgba(255, 255, 255, 0.35), 0 16px 40px rgba(44, 62, 80, 0.10);
+            border: 1px solid var(--glass-border);
+        }
+        #digital-clock { letter-spacing: 0.02em; font-variant-numeric: tabular-nums; }
+        #break-countdown { font-variant-numeric: tabular-nums; }
+
+        #welcome-screen {
+            background:
+                radial-gradient(45% 45% at 15% 20%, var(--mesh-c1), transparent 70%),
+                radial-gradient(40% 40% at 85% 15%, var(--mesh-c2), transparent 70%),
+                radial-gradient(45% 45% at 75% 85%, var(--mesh-c3), transparent 70%),
+                radial-gradient(40% 40% at 20% 85%, var(--mesh-c4), transparent 70%),
+                var(--bg-main);
+        }
+        .welcome-content {
+            background: rgba(255, 255, 255, 0.4);
+            -webkit-backdrop-filter: var(--glass-blur); backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow), var(--glass-highlight);
+            border-radius: 36px;
+            padding: 3.5rem 4rem;
+            margin: 1.5rem;
+        }
+
+        /* --- SETTINGS & POPUP --- */
+        :root { --tick-major: rgba(44,62,80,.6); --tick-minor: rgba(127,140,141,.3); }
+        .amps-title { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.5rem; }
+        .info-toggle { width: 26px; height: 26px; border-radius: 50%; border: 1.5px solid var(--color-accent); background: transparent; color: var(--color-accent); font: italic 700 .9rem/1 'Playfair Display', serif; cursor: pointer; transition: var(--transition); flex: none; }
+        .info-toggle:hover, .info-toggle[aria-expanded="true"] { background: var(--color-accent); color: #fff; }
+        
+        .amps-info { margin: 0 0 1.25rem; padding: 1rem 1.25rem; border-radius: var(--radius-md); background: var(--glass-bg-strong); border: 1px solid var(--glass-border); animation: fadeIn .3s ease-out; }
+        .amps-info[hidden] { display: none; }
+        .amps-info p { font-size: .95rem; line-height: 1.6; color: var(--color-text-light); margin: 0; }
+        .amps-info p + p { margin-top: .5rem; }
+        .amps-info .amps-full { font-size: 1rem; font-weight: 600; color: var(--color-text); }
+        .amps-info .amps-note { font-size: .88rem; font-style: italic; padding-top: .5rem; border-top: 1px solid rgba(44,62,80,.08); }
+
+        .settings-wrap { margin-top: auto; position: relative; }
+        .settings-btn { width: 100%; display: flex; align-items: center; gap: 1rem; padding: 1rem 1.5rem; border: none; background: transparent; border-radius: var(--radius-md); color: var(--color-text-light); font: inherit; font-weight: 500; cursor: pointer; transition: var(--transition); }
+        .settings-btn i { font-size: 1.2rem; width: 24px; text-align: center; }
+        .settings-btn:hover, .settings-btn[aria-expanded="true"] { background: rgba(255,255,255,.45); color: var(--color-text); }
+        
+        .settings-pop { 
+            position: absolute; 
+            left: 0; 
+            bottom: calc(100% + 12px); 
+            width: 270px; 
+            padding: 1.25rem; 
+            border-radius: var(--radius-md); 
+            background: rgba(255, 255, 255, 0.94); 
+            -webkit-backdrop-filter: blur(20px); 
+            backdrop-filter: blur(20px); 
+            border: 1px solid rgba(255, 255, 255, 0.9); 
+            box-shadow: 0 14px 35px rgba(44, 62, 80, 0.16), 0 2px 6px rgba(0,0,0,0.04); 
+            z-index: 1000; 
+            animation: fadeIn .25s ease-out; 
+        }
+        .settings-pop[hidden] { display: none; }
+        .settings-pop h4 { font: 600 .85rem var(--font-ui); color: var(--color-text-light); margin: 0 0 .5rem; }
+        .settings-pop h4:not(:first-child) { margin-top: 1.15rem; }
+        
+        .seg { display: flex; gap: 4px; padding: 3px; border-radius: 12px; background: rgba(44,62,80,.08); }
+        .seg button { flex: 1; border: none; background: transparent; padding: .5rem .4rem; border-radius: 9px; font: inherit; font-size: .88rem; color: var(--color-text-light); cursor: pointer; transition: var(--transition); }
+        .seg button[aria-pressed="true"] { background: var(--bg-card); color: var(--color-text); font-weight: 600; box-shadow: var(--shadow-sm); }
+
+        .color-palette-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 8px;
+            margin-top: 0.4rem;
+        }
+        .color-swatch {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,255,255,0.85);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.12);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+            position: relative;
+        }
+        .color-swatch:hover { transform: scale(1.15); box-shadow: 0 4px 8px rgba(0,0,0,0.18); }
+        .color-swatch.active { border-color: var(--color-text); transform: scale(1.12); outline: 2px solid var(--color-accent); outline-offset: 1px; }
+
+        /* Dark Mode */
+        html[data-theme="dark"] { 
+            color-scheme: dark;
+            --bg-main: #10161c; --bg-card: #1b242d; --color-text: #E6EBF0; --color-text-light: #9DAAB7; --color-beige: #1a222a; --color-accent: #7f93ab;
+            --glass-bg: rgba(30,40,52,.62); --glass-bg-strong: rgba(38,50,64,.82); --glass-border: rgba(255,255,255,.09);
+            --glass-shadow: 0 8px 32px rgba(0,0,0,.35); --glass-highlight: inset 0 1px 0 rgba(255,255,255,.06);
+            --tick-major: rgba(230,235,240,.7); --tick-minor: rgba(157,170,183,.4); 
+        }
+        html[data-theme="dark"] body::before { opacity: .35; }
+        html[data-theme="dark"] .settings-pop { 
+            background: rgba(27, 36, 45, 0.96); 
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 14px 40px rgba(0,0,0,0.45);
+        }
+        html[data-theme="dark"] .welcome-content { background: var(--glass-bg); }
+        html[data-theme="dark"] .welcome-btn, html[data-theme="dark"] button.primary-btn { background: linear-gradient(180deg,#6a87a2,#506a82); }
+        html[data-theme="dark"] input, html[data-theme="dark"] select { color: var(--color-text); }
+        html[data-theme="dark"] .task-input-group input, html[data-theme="dark"] .task-input-group select, html[data-theme="dark"] #schedule-start-time, html[data-theme="dark"] #schedule-end-time { background: rgba(255,255,255,.07) !important; border-color: rgba(255,255,255,.14) !important; }
+        html[data-theme="dark"] .task-input-group input:focus, html[data-theme="dark"] .task-input-group select:focus, html[data-theme="dark"] #schedule-start-time:focus, html[data-theme="dark"] #schedule-end-time:focus { background: rgba(255,255,255,.12) !important; }
+        html[data-theme="dark"] #schedule-controls { background: rgba(255,255,255,.05) !important; }
+        html[data-theme="dark"] .nav-item:hover, html[data-theme="dark"] .settings-btn:hover, html[data-theme="dark"] .settings-btn[aria-expanded="true"] { background: rgba(255,255,255,.08); }
+        html[data-theme="dark"] .task-item, html[data-theme="dark"] .analog-clock, html[data-theme="dark"] .doodle-header, html[data-theme="dark"] #doodle-canvas { background: rgba(255,255,255,.05); }
+        html[data-theme="dark"] .schedule-visualizer { background: rgba(255,255,255,.04); }
+        html[data-theme="dark"] .task-time-badge { background: rgba(255,255,255,.1); color: #c9d3dc; }
+        html[data-theme="dark"] .timeline-item::before { border-color: #1a222a; }
+        html[data-theme="dark"] .quote-banner { background: linear-gradient(135deg,rgba(80,120,100,.45),rgba(130,80,80,.35)); color: var(--color-text); }
+        html[data-theme="dark"] .amps-intro { 
+            background: rgba(169, 209, 186, 0.12); 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            border-left: 4px solid var(--color-mint-dark); 
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+        html[data-theme="dark"] .amps-info .amps-note, html[data-theme="dark"] .learn-card-info { border-top-color: rgba(255,255,255,.1); }
+        html[data-theme="dark"] .learn-card.active { border-color: rgba(230,235,240,.55); }
+        html[data-theme="dark"] .result-high { background: rgba(242,185,179,.18); color: #ffb4a8; }
+        html[data-theme="dark"] .result-medium { background: rgba(255,224,138,.14); color: #ffe08a; }
+        html[data-theme="dark"] .result-low { background: rgba(169,209,186,.16); color: #9fdcb7; }
+        html[data-theme="dark"] button.secondary-btn { background: rgba(255,255,255,.06); color: var(--color-text-light); }
+        html[data-theme="dark"] button.secondary-btn:hover { background: rgba(255,255,255,.12); color: var(--color-text); }
+        html[data-theme="dark"] .breathing-widget { background-image: linear-gradient(rgba(16,22,28,.68),rgba(16,22,28,.68)); }
+        html[data-theme="dark"] .ambient-card, html[data-theme="dark"] .sound-btn { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.12); }
+        html[data-theme="dark"] .ambient-card:hover, html[data-theme="dark"] .ambient-card.active { background: rgba(255,255,255,.2); }
+        html[data-theme="dark"] .sound-btn.active, html[data-theme="dark"] .shatter-btn { background: #5f7a93; }
+        html[data-theme="dark"] .shatter-btn:hover { background: #E74C3C; }
+        html[data-theme="dark"] .seg { background: rgba(255,255,255,.08); }
+        html[data-theme="dark"] .color-swatch { border-color: rgba(255,255,255,0.2); }
+        html[data-theme="dark"] .color-swatch.active { border-color: #fff; }
+        html[data-theme="dark"] .main-content::-webkit-scrollbar-thumb { background: rgba(255,255,255,.18); }
+
+        /* =====================================================================
+           RESPONSIVE MOBILE ENHANCEMENTS & FIXED HORIZONTAL FIT
+           ===================================================================== */
         @media (max-width: 900px) {
-            body { flex-direction: column; }
-            .sidebar { width: 100%; padding: 1rem; flex-direction: row; align-items: center; justify-content: space-between; border-right: none; border-bottom: 1px solid rgba(0,0,0,0.05); }
-            .logo-area { margin-bottom: 0; }
-            .nav-menu { flex-direction: row; flex: unset; }
-            .nav-item { padding: 0.5rem; gap: 0.5rem; }
+            body { 
+                flex-direction: column; 
+                height: 100vh;
+                height: 100dvh;
+                overflow: hidden;
+            }
+            .sidebar { 
+                width: 100%; 
+                padding: 0.65rem 1rem; 
+                flex-direction: row; 
+                align-items: center; 
+                justify-content: space-between; 
+                border-right: none; 
+                border-bottom: 1px solid var(--glass-border); 
+                flex-shrink: 0;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            }
+            .logo-area { margin-bottom: 0; display: flex; align-items: center; }
+            .logo-title { font-size: 1.5rem; letter-spacing: 1px; }
+            .logo-slogan { display: none; }
+            
+            .nav-menu { 
+                flex-direction: row; 
+                flex: unset; 
+                gap: 0.35rem; 
+                align-items: center;
+            }
+            .nav-item { 
+                padding: 0.5rem 0.65rem; 
+                min-width: 40px; 
+                min-height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.5rem; 
+            }
             .nav-item span { display: none; }
-            .main-content { padding: 1.5rem; }
-            .plan-container { grid-template-columns: 1fr; }
-            .learn-cards-container { flex-direction: column; }
-            .pause-container { grid-template-columns: 1fr; grid-template-rows: auto 400px; height: auto; }
-            .analog-clock { width: 220px; height: 220px; }
-            #digital-clock { font-size: 3rem; }
+            
+            .settings-wrap { margin-top: 0; position: relative; }
+            .settings-btn { 
+                padding: 0.5rem; 
+                gap: 0.5rem; 
+                min-width: 40px; 
+                min-height: 40px; 
+                justify-content: center; 
+            }
+            .settings-btn span { display: none; }
+            .settings-pop { 
+                left: auto; 
+                right: 0; 
+                bottom: auto; 
+                top: calc(100% + 10px); 
+                max-width: calc(100vw - 20px);
+                width: 280px;
+            }
+
+            .main-content { 
+                padding: 1.5rem; 
+                flex: 1;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            .plan-container { grid-template-columns: 1fr; gap: 1.5rem; }
+            .learn-cards-container { grid-template-columns: 1fr; gap: 0.8rem; }
+            
+            .pause-container { 
+                grid-template-columns: 1fr; 
+                grid-template-rows: auto 420px; 
+                height: auto; 
+                gap: 1.5rem; 
+                padding-bottom: 2rem;
+            }
+            .analog-clock { width: 230px; height: 230px; }
+            #digital-clock { font-size: 3.2rem; }
+            
+            .welcome-content {
+                padding: 2.5rem 2rem;
+                margin: 1rem;
+                border-radius: 28px;
+            }
+            .welcome-logo { font-size: 3.2rem; }
+        }
+
+        @media (max-width: 600px) {
+            .main-content { 
+                padding: 1rem 0.75rem; 
+                overflow-x: hidden; 
+            }
+            .card {
+                padding: 1.25rem 1rem;
+                border-radius: 20px;
+                margin-bottom: 1.25rem;
+                width: 100%;
+            }
+            .section-header { margin-bottom: 1.2rem; }
+            .section-header h2 { font-size: 1.55rem; }
+            .section-header p { font-size: 0.92rem; }
+            
+            /* Learn cards fit mobile */
+            .learn-cards-container {
+                width: 100%;
+                gap: 0.8rem;
+                margin-bottom: 2rem;
+            }
+            .learn-card {
+                width: 100%;
+                padding: 1.1rem;
+            }
+            
+            /* Enhanced digital clock and analog clock spacing on mobile */
+            .digital-clock-wrapper {
+                height: 52px;
+                margin-bottom: 1.6rem; /* Giãn cách rõ ràng với đồng hồ kim */
+            }
+            #digital-clock { font-size: 2.8rem; }
+            .clock-container {
+                margin-bottom: 2rem;
+            }
+            .analog-clock {
+                width: 210px;
+                height: 210px;
+            }
+
+            /* Plan inputs on mobile */
+            .task-input-group { flex-direction: column; gap: 0.6rem; }
+            .task-input-group input[type="text"], .task-input-group select { 
+                width: 100%; 
+                font-size: 0.95rem;
+                padding: 0.75rem 0.9rem;
+            }
+            .extra-fields-box { grid-template-columns: 1fr; gap: 0.6rem; }
+            
+            .task-item { 
+                flex-direction: column; 
+                align-items: flex-start; 
+                gap: 0.7rem; 
+                padding: 0.85rem; 
+            }
+            .task-info { 
+                width: 100%; 
+                flex-wrap: wrap; 
+                word-break: break-word; 
+                gap: 0.5rem; 
+            }
+            .task-actions { 
+                width: 100%; 
+                justify-content: flex-end; 
+                border-top: 1px solid rgba(0,0,0,0.06); 
+                padding-top: 0.5rem; 
+                margin-top: 0.2rem; 
+            }
+            html[data-theme="dark"] .task-actions { border-top-color: rgba(255,255,255,0.08); }
+            
+            #schedule-controls { padding: 1rem !important; }
+            #schedule-controls > div { flex-direction: column; align-items: flex-start !important; gap: 0.6rem; }
+            #schedule-controls input[type="time"] { width: 100%; }
+            .timeline-item { word-break: break-word; padding-right: 0.3rem; }
         }
     </style>
+    <script>try{var p=localStorage.getItem('insight_theme')||'light';document.documentElement.dataset.theme=(p==='dark')?'dark':'light'}catch(e){}</script>
 </head>
 <body>
 
@@ -496,19 +1008,32 @@
     <div id="welcome-screen">
         <div class="welcome-content">
             <h1 class="welcome-logo">INSIGHT</h1>
-            <p class="welcome-slogan">Soi thấu tâm trí, bật mode siêu focus!</p>
+            <p class="welcome-slogan">Soi Thấu Tâm Trí, Bật Mood Siêu Focus</p>
             <button class="welcome-btn" id="btn-start-app">Bắt đầu <i class="fa-solid fa-arrow-right"></i></button>
         </div>
     </div>
 
     <!-- SESSION COMPLETION POPUP -->
-    <div id="session-popup" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 10000; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; pointer-events: none;">
-        <div class="card" style="text-align: center; max-width: 400px; width: 90%; padding: 2.5rem 2rem; margin: 0; box-shadow: 0 20px 40px rgba(0,0,0,0.2);">
+    <div id="session-popup" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 10000; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; pointer-events: none; padding: 1rem;">
+        <div class="card" style="text-align: center; max-width: 400px; width: 100%; padding: 2.5rem 1.8rem; margin: 0; box-shadow: 0 20px 40px rgba(0,0,0,0.2); max-height: 90vh; overflow-y: auto;">
             <h2 id="popup-title" style="margin-bottom: 1rem; font-family: 'Playfair Display', serif;">✨ Hết giờ rồi!</h2>
             <p id="popup-desc" style="color: var(--color-text-light); margin-bottom: 2rem; line-height: 1.6;"></p>
-            <div style="display: flex; gap: 1rem; justify-content: center;">
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
                 <button class="primary-btn" id="btn-take-break" style="background-color: var(--color-mint-dark); color: #2c3e50;">Nghỉ ngơi</button>
                 <button class="secondary-btn" id="btn-continue-work">Tiếp tục</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL RESCHEDULE PREVIEW -->
+    <div id="reschedule-modal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 10001; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; pointer-events: none; padding: 1.2rem;">
+        <div class="card" style="max-width: 520px; width: 100%; padding: 2rem; margin: 0; box-shadow: 0 20px 40px rgba(0,0,0,0.25); max-height: 85vh; overflow-y: auto;">
+            <h3 style="margin-bottom: 0.6rem;"><i class="fa-solid fa-arrows-rotate"></i> Xem trước Lịch điều chỉnh</h3>
+            <p style="font-size: 0.9rem; color: var(--color-text-light); margin-bottom: 1.2rem;">Hệ thống đã tính toán lại từ thời điểm hiện tại, tôn trọng lịch cố định và các nhiệm vụ chưa xong.</p>
+            <div id="reschedule-preview-timeline" class="timeline" style="margin-bottom: 1.5rem; max-height: 250px; overflow-y: auto; padding-right: 0.5rem;"></div>
+            <div style="display: flex; gap: 0.8rem; justify-content: flex-end; flex-wrap: wrap;">
+                <button class="secondary-btn" id="btn-cancel-reschedule">Hủy</button>
+                <button class="primary-btn" id="btn-confirm-reschedule">Xác nhận áp dụng</button>
             </div>
         </div>
     </div>
@@ -517,13 +1042,34 @@
     <nav class="sidebar">
         <div class="logo-area">
             <h1 class="logo-title">INSIGHT</h1>
-            <p class="logo-slogan">Soi thấu tâm trí, bật mode siêu focus!</p>
+            <p class="logo-slogan">Soi Thấu Tâm Trí, Bật Mood Siêu Focus</p>
         </div>
         <div class="nav-menu">
             <div class="nav-item active" data-target="daily"><i class="fa-solid fa-sun"></i> <span>Daily</span></div>
             <div class="nav-item" data-target="plan" id="nav-plan"><i class="fa-solid fa-list-check"></i> <span>Plan</span></div>
             <div class="nav-item" data-target="learn"><i class="fa-solid fa-stopwatch"></i> <span>Learn</span></div>
             <div class="nav-item" data-target="pause"><i class="fa-solid fa-spa"></i> <span>Pause</span></div>
+        </div>
+        
+        <div class="settings-wrap">
+            <button type="button" class="settings-btn" id="settings-btn" aria-expanded="false" aria-controls="settings-pop"><i class="fa-solid fa-gear"></i> <span>Cài đặt</span></button>
+            <div class="settings-pop" id="settings-pop" hidden>
+                <h4>Ngôn ngữ</h4>
+                <div class="seg" id="seg-lang"><button type="button" data-lang="vi">Tiếng Việt</button><button type="button" data-lang="en">English</button></div>
+                
+                <h4>Giao diện</h4>
+                <div class="seg" id="seg-theme"><button type="button" data-theme-opt="light">Sáng</button><button type="button" data-theme-opt="dark">Tối</button></div>
+
+                <h4>Màu nền</h4>
+                <div class="color-palette-grid" id="bg-palette-selector">
+                    <button type="button" class="color-swatch active" data-bg-theme="mesh" title="Cầu vồng pastel (Hài hòa cảm xúc)" style="background: linear-gradient(135deg, #a9d1ba, #f2b9b3, #c3b1e1);"></button>
+                    <button type="button" class="color-swatch" data-bg-theme="sage" title="Xanh xô thơm (Xoa dịu, giảm stress)" style="background: linear-gradient(135deg, #B2D8C6, #D8EADF);"></button>
+                    <button type="button" class="color-swatch" data-bg-theme="ocean" title="Xanh sương mai (Tập trung, hạ hỏa)" style="background: linear-gradient(135deg, #A8CDE2, #D4E9F7);"></button>
+                    <button type="button" class="color-swatch" data-bg-theme="lavender" title="Tím oải hương (Tĩnh tâm, bớt âu lo)" style="background: linear-gradient(135deg, #CEBEE8, #EAE2F8);"></button>
+                    <button type="button" class="color-swatch" data-bg-theme="oat" title="Yến mạch ấm (Ấn tượng an toàn, thư thái)" style="background: linear-gradient(135deg, #E6DAC8, #F7F1E8);"></button>
+                    <button type="button" class="color-swatch" data-bg-theme="peach" title="Hồng đào dịu (Khoan dung với chính mình)" style="background: linear-gradient(135deg, #F9C5BE, #FDE6E3);"></button>
+                </div>
+            </div>
         </div>
     </nav>
 
@@ -533,8 +1079,8 @@
         <!-- 1. DAILY SECTION -->
         <section id="daily" class="view-section active">
             <div class="section-header">
-                <h2>Khởi động xíu nào!</h2>
-                <p>Check-in trạng thái trước khi làm việc.</p>
+                <h2>Khởi động nhẹ nhàng</h2>
+                <p>Ghi nhận trạng thái của bạn trước khi làm việc.</p>
             </div>
             
             <div class="quote-banner" id="daily-quote">
@@ -542,7 +1088,7 @@
             </div>
 
             <div class="card">
-                <h3>Vibe hiện tại của bạn thế nào?</h3>
+                <h3>Tâm trạng hiện tại của bạn thế nào?</h3>
                 <div class="mood-tracker">
                     <button class="mood-btn" data-mood="terrible">😫</button>
                     <button class="mood-btn" data-mood="bad">😔</button>
@@ -554,60 +1100,154 @@
             </div>
 
             <div class="card">
-                <h3>Thang đo AMPS <small>(Maladaptive Perfectionism)</small></h3>
+                <h3 class="amps-title">Thang đo AMPS <button type="button" class="info-toggle" id="amps-info-btn" aria-expanded="false" aria-controls="amps-info" title="Xem thông tin thang đo"><span aria-hidden="true">i</span></button></h3>
+                <div class="amps-info" id="amps-info" hidden>
+                    <p class="amps-full">Assessment of Maladaptive Perfectionism Scale</p>
+                    <p>Chủ nghĩa cầu toàn không thích nghi (maladaptive perfectionism) là việc đặt tiêu chuẩn quá cao so với thực tế, dẫn đến lo lắng, tự trách và trì hoãn.</p>
+                    <p class="amps-note">Đây là công cụ tự đánh giá nhanh, không thay thế chẩn đoán chuyên môn.</p>
+                </div>
+                
                 <div class="amps-intro">
-                    <p><strong>Hôm nay, bạn có đang tự làm khó mình không?</strong></p>
-                    <p style="font-size: 0.9rem; color: var(--color-text-light);">Sự cầu toàn độc hại là khi bạn đặt tiêu chuẩn phi thực tế, gây sợ hãi và trì hoãn. Hãy kiểm tra xem "con quái vật cầu toàn" hôm nay lớn cỡ nào nhé.</p>
+                    <p><strong>Hôm nay, bạn có đang quá khắt khe với bản thân không?</strong></p>
+                    <p>Trả lời vài câu ngắn để xem mức độ cầu toàn của bạn hôm nay.</p>
                 </div>
 
                 <div id="amps-form">
                     <div id="amps-questions-container"></div>
-                    <button class="primary-btn" id="btn-submit-amps" style="width: 100%; margin-top: 1rem;">Phân tích & Lên kế hoạch</button>
+                    <button class="primary-btn" id="btn-submit-amps" style="width: 100%; margin-top: 1rem;">Xem kết quả & lập kế hoạch</button>
                 </div>
                 <div id="amps-result"></div>
             </div>
         </section>
 
-        <!-- 2. PLAN SECTION -->
+        <!-- 2. PLAN SECTION ENHANCED -->
         <section id="plan" class="view-section">
             <div class="section-header">
-                <h2>Kế hoạch hôm nay</h2>
-                <p id="plan-subtitle">Quy tắc số 5 (The Power of 5). Giới hạn nhiệm vụ để chống trì hoãn.</p>
+                <h2>Kế hoạch học tập thông minh</h2>
+                <p id="plan-subtitle">Tự động tối ưu lịch trình theo quỹ thời gian rảnh và mức độ tập trung của bạn.</p>
             </div>
 
             <div class="plan-container">
-                <div class="card">
-                    <h3>To-do List (chọn lọc tinh túy) <span id="task-counter" style="color:var(--color-text-light); font-size: 1rem; font-weight:normal;">(0/5)</span></h3>
-                    <p style="font-size: 0.9rem; color: var(--color-text-light); margin-bottom: 1.5rem;" id="task-warning">
-                        Chỉ chọn 5 việc quan trọng nhất ngày hôm nay.
-                    </p>
-                    
-                    <div class="task-input-group">
-                        <input type="text" id="task-name" placeholder="Ví dụ: Học IELTS...">
-                        <select id="task-time">
-                            <option value="25">25 Phút (1 Pomo)</option>
-                            <option value="50">50 Phút (2 Pomo)</option>
-                            <option value="90">90 Phút (Deep Work)</option>
-                        </select>
-                    </div>
-                    <button class="primary-btn" id="btn-add-task" style="width: 100%; padding: 0.6rem;">Thêm nhiệm vụ</button>
-                    
-                    <ul class="task-list" id="task-list-ui"></ul>
-
-                    <div id="schedule-controls" style="display: none; margin-top: 2rem; background: var(--bg-main); padding: 1.2rem; border-radius: var(--radius-sm); border: 1px solid #eaeaea;">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                            <label for="schedule-start-time" style="font-weight: 500; font-size: 0.95rem;">Giờ bắt đầu chạy task:</label>
-                            <input type="time" id="schedule-start-time" value="08:30" style="padding: 0.5rem; border: 1px solid #ddd; border-radius: var(--radius-sm); font-family: inherit; font-size: 1rem; outline: none; background: white;">
+                <!-- Column Left: Tasks & Availability Management -->
+                <div>
+                    <!-- Sub-card: Availability & Fixed Routine -->
+                    <div class="card" style="padding: 1.5rem 1.8rem; margin-bottom: 1.5rem;">
+                        <div class="sub-config-title">
+                            <span><i class="fa-solid fa-clock"></i> Khung giờ học & Sinh hoạt cố định</span>
+                            <button class="secondary-btn" id="btn-toggle-routine" style="padding: 0.35rem 0.9rem; font-size: 0.8rem;">
+                                <i class="fa-solid fa-sliders"></i> Tùy chỉnh khung giờ
+                            </button>
                         </div>
-                        <button class="primary-btn" id="btn-generate-schedule" style="width: 100%;">Tạo Lịch Trình Tự Động</button>
+                        
+                        <div id="routine-config-panel" style="display: none; margin-top: 1rem; border-top: 1px dashed rgba(44, 62, 80, 0.15); padding-top: 1rem;">
+                            <!-- Start & End Bounds -->
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                                <div>
+                                    <label style="font-size: 0.82rem; font-weight: 500; color: var(--color-text-light);">Bắt đầu ngày học:</label>
+                                    <input type="time" id="schedule-start-time" value="08:00" style="width: 100%; margin-top: 4px;">
+                                </div>
+                                <div>
+                                    <label style="font-size: 0.82rem; font-weight: 500; color: var(--color-text-light);">Kết thúc mong muốn:</label>
+                                    <input type="time" id="schedule-end-time" value="21:30" style="width: 100%; margin-top: 4px;">
+                                </div>
+                            </div>
+
+                            <!-- Fixed Activities -->
+                            <div style="margin-bottom: 1rem;">
+                                <label style="font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 0.3rem;">
+                                    Hoạt động cố định (Học trường, ca làm, sinh hoạt):
+                                </label>
+                                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                                    <input type="text" id="fixed-act-name" placeholder="Tên việc (VD: Học trường)" style="flex: 1; min-width: 130px; padding: 0.5rem 0.7rem; font-size: 0.85rem; border: 1px solid #ddd; border-radius: 8px;">
+                                    <input type="time" id="fixed-act-start" value="13:30" style="padding: 0.5rem; font-size: 0.85rem; border: 1px solid #ddd; border-radius: 8px;">
+                                    <input type="time" id="fixed-act-end" value="17:00" style="padding: 0.5rem; font-size: 0.85rem; border: 1px solid #ddd; border-radius: 8px;">
+                                    <button class="secondary-btn" id="btn-add-fixed-act" style="padding: 0.5rem 0.9rem; font-size: 0.85rem;">+ Thêm</button>
+                                </div>
+                                <div class="pill-list" id="fixed-activities-list"></div>
+                            </div>
+                        </div>
+
+                        <div id="availability-summary" style="font-size: 0.88rem; color: var(--color-text-light);">
+                            Thời gian khả dụng: <span id="summary-hours-text" style="font-weight: 600; color: var(--color-text);">08:00 - 21:30</span>
+                            <span id="summary-fixed-count" style="margin-left: 8px; font-size: 0.8rem; background: rgba(230, 126, 34, 0.15); color: #d35400; padding: 2px 8px; border-radius: 10px;">0 lịch cố định</span>
+                        </div>
+                    </div>
+
+                    <!-- Main Tasks Card -->
+                    <div class="card">
+                        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem;">
+                            <h3>Danh sách nhiệm vụ <span id="task-counter" style="color:var(--color-text-light); font-size: 1rem; font-weight:normal;">(0/5)</span></h3>
+                            <button id="btn-quick-reschedule" class="secondary-btn" style="padding: 0.4rem 0.85rem; font-size: 0.82rem;" title="Tính toán lại lịch từ thời điểm hiện tại">
+                                <i class="fa-solid fa-arrows-rotate"></i> Sắp xếp lại lịch
+                            </button>
+                        </div>
+                        <p style="font-size: 0.88rem; color: var(--color-text-light); margin-bottom: 1.2rem;" id="task-warning">
+                            Chỉ chọn 5 việc quan trọng nhất ngày hôm nay.
+                        </p>
+                        
+                        <!-- Primary Task Inputs -->
+                        <div class="task-input-group">
+                            <input type="text" id="task-name" placeholder="Ví dụ: Luyện đề IELTS Reading...">
+                            <select id="task-time">
+                                <option value="25">25 phút (1 Pomodoro)</option>
+                                <option value="50">50 phút (2 Pomodoro)</option>
+                                <option value="90">90 phút (Làm việc sâu)</option>
+                            </select>
+                        </div>
+
+                        <!-- Extra Metadata Fields Toggle -->
+                        <span class="extra-fields-toggle" id="btn-toggle-extra-fields">
+                            <i class="fa-solid fa-angle-right"></i> Thêm Deadline, Ưu tiên & Độ khó
+                        </span>
+
+                        <div class="extra-fields-box" id="extra-fields-box">
+                            <div>
+                                <label for="task-deadline">Deadline:</label>
+                                <input type="time" id="task-deadline" value="20:00">
+                            </div>
+                            <div>
+                                <label for="task-priority">Mức ưu tiên:</label>
+                                <select id="task-priority">
+                                    <option value="high">Cao</option>
+                                    <option value="medium" selected>Vừa</option>
+                                    <option value="low">Thấp</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="task-difficulty">Độ khó:</label>
+                                <select id="task-difficulty">
+                                    <option value="hard">Khó (Đòi hỏi tập trung)</option>
+                                    <option value="medium" selected>Vừa phải</option>
+                                    <option value="easy">Nhẹ nhàng</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button class="primary-btn" id="btn-add-task" style="width: 100%; padding: 0.65rem;">Thêm nhiệm vụ</button>
+                        
+                        <ul class="task-list" id="task-list-ui"></ul>
+
+                        <div id="schedule-controls" style="display: none; margin-top: 1.5rem; background: var(--bg-main); padding: 1.2rem; border-radius: var(--radius-sm); border: 1px solid #eaeaea;">
+                            <button class="primary-btn" id="btn-generate-schedule" style="width: 100%;">
+                                <i class="fa-solid fa-wand-magic-sparkles"></i> Đề xuất Lịch học thông minh
+                            </button>
+                        </div>
                     </div>
                 </div>
 
+                <!-- Column Right: Timeline Output -->
                 <div class="schedule-visualizer" id="schedule-ui">
-                    <h3 style="margin-bottom: 1.5rem; text-align: center; color: var(--color-text-light);">Timeline dự kiến</h3>
-                    <div class="timeline" id="timeline-container">
-                        <p style="text-align:center; color: #aaa; margin-top: 50px;">Chưa có data lịch trình. Lên task rồi thiết lập giờ chạy thử xem sao.</p>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem;">
+                        <h3 style="color: var(--color-text); font-size: 1.15rem;">Lịch trình thông minh</h3>
+                        <span id="timeline-status-badge" style="font-size: 0.75rem; padding: 3px 8px; border-radius: 12px; background: rgba(44,62,80,0.08); color: var(--color-text-light);">Tự động tối ưu</span>
                     </div>
+                    
+                    <div class="timeline" id="timeline-container">
+                        <p style="text-align:center; color: #aaa; margin-top: 50px;">Chưa có lịch trình. Hãy thêm nhiệm vụ và ấn "Đề xuất Lịch học thông minh".</p>
+                    </div>
+
+                    <!-- Unscheduled alerts -->
+                    <div id="unscheduled-container" style="display: none;"></div>
                 </div>
             </div>
         </section>
@@ -623,9 +1263,9 @@
                             <i class="fa-solid fa-circle-question info-btn" title="Xem chi tiết"></i>
                         </div>
                         <div class="learn-card-info">
-                            <b>Tính năng:</b> Làm việc cường độ cao trong 25 phút, sau đó cho não xả hơi 5 phút.<br>
-                            <b>Dùng khi nào:</b> Lý tưởng khi bạn có nhiều task nhỏ lắt nhắt hoặc đang quá lười.<br>
-                            <b>Cách thực hiện:</b> Tập trung tối đa và bắt đầu. Hãy đứng dậy đi lại lúc nghỉ.
+                            <b>Tính năng:</b> Làm việc tập trung 25 phút, sau đó nghỉ ngắn 5 phút.<br>
+                            <b>Dùng khi nào:</b> Phù hợp khi bạn có nhiều việc nhỏ hoặc đang khó bắt đầu.<br>
+                            <b>Cách thực hiện:</b> Tập trung trọn vẹn rồi bắt đầu. Khi nghỉ, hãy đứng dậy đi lại.
                         </div>
                     </div>
                     
@@ -635,9 +1275,9 @@
                             <i class="fa-solid fa-circle-question info-btn" title="Xem chi tiết"></i>
                         </div>
                         <div class="learn-card-info">
-                            <b>Tính năng:</b> Cày cuốc 45 phút rồi tự thưởng 15 phút xem phim/giải trí.<br>
-                            <b>Dùng khi nào:</b> Cần hoàn thành một nhiệm vụ lớn nhưng cần động lực mồi.<br>
-                            <b>Cách thực hiện:</b> Tập trung hết tốc lực 45 phút. Xong thì thoải mái giải trí 15 phút.
+                            <b>Tính năng:</b> Làm việc tập trung 45 phút, sau đó nghỉ giải trí 15 phút (ví dụ xem một tập phim ngắn).<br>
+                            <b>Dùng khi nào:</b> Phù hợp khi cần hoàn thành một nhiệm vụ lớn và muốn có phần thưởng để duy trì động lực.<br>
+                            <b>Cách thực hiện:</b> Tập trung trong 45 phút, sau đó thư giãn 15 phút.
                         </div>
                     </div>
 
@@ -647,21 +1287,19 @@
                             <i class="fa-solid fa-circle-question info-btn" title="Xem chi tiết"></i>
                         </div>
                         <div class="learn-card-info">
-                            <b>Tính năng:</b> Đồng hồ bấm tiến không có giới hạn ép buộc. Cứ làm việc đến khi bạn mệt thì tự nghỉ.<br>
-                            <b>Dùng khi nào:</b> Dành cho lúc bạn đang bị cuốn vào công việc (như code, thiết kế, viết lách).<br>
-                            <b>Cách thực hiện:</b> Cứ thế trôi theo flow. Bấm dừng lại bất cứ lúc nào não cần sạc.
+                            <b>Tính năng:</b> Đồng hồ đếm lên, không giới hạn thời gian. Bạn tự quyết định khi nào nghỉ.<br>
+                            <b>Dùng khi nào:</b> Phù hợp khi bạn đang cuốn vào công việc (như lập trình, thiết kế, viết lách).<br>
+                            <b>Cách thực hiện:</b> Làm việc theo mạch tập trung của bạn và bấm tạm dừng khi cần nghỉ.
                         </div>
                     </div>
                 </div>
 
                 <div id="focus-visuals" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
-                    <!-- Đồng hồ Số & Ẩn hiện -->
                     <div class="digital-clock-wrapper">
                         <div id="digital-clock">25:00</div>
                         <button id="btn-toggle-digital" title="Ẩn đồng hồ số"><i class="fa-solid fa-eye-slash"></i></button>
                     </div>
 
-                    <!-- Đồng hồ Kim -->
                     <div class="clock-container">
                         <div class="analog-clock" id="analog-clock">
                             <svg class="clock-progress-ring" viewBox="0 0 100 100" id="progress-svg">
@@ -677,9 +1315,9 @@
                         </div>
                     </div>
 
-                    <div id="timer-controls" style="margin-bottom: 1rem; min-height: 50px;">
+                    <div id="timer-controls" style="margin: 0.5rem 0 1rem; min-height: 50px;">
                         <button class="primary-btn" id="btn-timer-toggle" style="padding: 0.6rem 2rem; font-size: 0.95rem;">
-                            <i class="fa-solid fa-play"></i> Bắt đầu Focus
+                            <i class="fa-solid fa-play"></i> Bắt đầu tập trung
                         </button>
                         <div id="timer-status" style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--color-text-light); font-weight: 500;"></div>
                     </div>
@@ -689,7 +1327,7 @@
                     </p>
                 </div>
 
-                <!-- BREAK SCREEN (Only visible during break mode) -->
+                <!-- BREAK SCREEN -->
                 <div id="break-screen" style="display: none; flex-direction: column; align-items: center; justify-content: center; width: 100%; padding: 1rem 0; min-height: 350px;">
                     <h3 id="break-title" style="color: var(--color-text-light); font-size: 1.2rem; margin-bottom: 1rem;">☕ Thời gian nghỉ</h3>
                     <div id="break-countdown" style="font-family: 'Playfair Display', serif; font-size: 4.5rem; font-weight: 700; color: var(--color-text); margin-bottom: 1rem; letter-spacing: 2px;">05:00</div>
@@ -704,13 +1342,13 @@
         <!-- 4. PAUSE SECTION -->
         <section id="pause" class="view-section">
             <div class="section-header">
-                <h2>Trạm sạc năng lượng</h2>
+                <h2>Không gian nghỉ ngơi</h2>
                 <p>Dành một chút thời gian để nghỉ ngơi. Cho phép bản thân thả lỏng.</p>
             </div>
 
             <div class="pause-container">
                 <div class="breathing-widget" id="breathing-widget-bg">
-                    <h3 style="margin-bottom: 0.5rem; position: relative; z-index: 2; font-size: 1.2rem;">Hít thở (4-4-4)</h3>
+                    <h3 style="margin-bottom: 0.5rem; position: relative; z-index: 2; font-size: 1.2rem;">Hít thở nhịp 4-4-4</h3>
                     
                     <div class="breathe-graph-container">
                         <svg class="breathe-wave-svg" viewBox="0 0 280 100" preserveAspectRatio="none">
@@ -725,7 +1363,7 @@
                     <div class="ambient-selector">
                         <div class="ambient-cards">
                             <div class="ambient-card active" data-key="ocean" data-bg="#E3F2FD" title="Đại dương">🌊</div>
-                            <div class="ambient-card" data-key="432hz" data-bg="#F3E5F5" title="Tần số 432Hz">🧘</div>
+                            <div class="ambient-card" data-key="432hz" data-bg="#F3E5F5" title="Âm thanh nền trầm">🧘</div>
                             <div class="ambient-card" data-key="rain" data-bg="#ECEFF1" title="Mưa">🌧️</div>
                             <div class="ambient-card" data-key="rainforest" data-bg="#E8F5E9" title="Rừng mưa nhiệt đới">🌿</div>
                         </div>
@@ -736,8 +1374,8 @@
                 <div class="doodling-area">
                     <div class="doodle-header">
                         <div style="display: flex; flex-direction: column; gap: 4px;">
-                            <span style="font-weight:600;"><i class="fa-solid fa-palette"></i> Bảng trắng xả stress</span>
-                            <span style="font-size:0.8rem; opacity:0.8;">Tự do vẽ vời để giải tỏa căng thẳng!</span>
+                            <span style="font-weight:600;"><i class="fa-solid fa-palette"></i> Bảng vẽ tự do</span>
+                            <span style="font-size:0.8rem; opacity:0.8;">Vẽ tự do để thư giãn.</span>
                         </div>
                         <div class="tools">
                             <div class="tool-btn tool-soft-blue active" data-color="#AEC6CF"></div>
@@ -747,7 +1385,7 @@
                         </div>
                     </div>
                     <canvas id="doodle-canvas"></canvas>
-                    <div class="affirmation-overlay" id="affirmation-text">"Cứ vẽ bất cứ thứ gì bạn muốn, không ai chấm điểm đâu."</div>
+                    <div class="affirmation-overlay" id="affirmation-text">"Cứ vẽ bất cứ điều gì bạn muốn, không ai chấm điểm cả."</div>
                 </div>
             </div>
         </section>
@@ -756,7 +1394,19 @@
 
     <!-- LOGIC SCRIPT -->
     <script>
-        // --- 0. WELCOME SCREEN & NAVIGATION LOGIC ---
+        // --- GLOBAL APP STATE & USER CONTEXT ---
+        const AppState = {
+            maxTasks: 5,
+            tasks: [],
+            mood: 'okay',          // Captured from Daily
+            ampsScore: 10,         // Captured from Daily
+            startTime: '08:00',
+            endTime: '21:30',
+            fixedActivities: [],   // Array of { id, name, start, end }
+            generatedSchedule: []
+        };
+
+        // --- 0. WELCOME & TAB NAVIGATION ---
         const btnStartApp = document.getElementById('btn-start-app');
         const welcomeScreen = document.getElementById('welcome-screen');
 
@@ -792,17 +1442,18 @@
             });
         });
 
-        function goToTab(targetId) { document.querySelector(`.nav-item[data-target="${targetId}"]`).click(); }
+        function goToTab(targetId) { 
+            const tab = document.querySelector(`.nav-item[data-target="${targetId}"]`);
+            if (tab) tab.click();
+        }
 
-        const AppState = { maxTasks: 5, tasks: [] };
-
-        // --- 1. DAILY LOGIC & QUESTIONS BANK ---
+        // --- 1. DAILY VIEW & PSYCHOLOGICAL CONTEXT CAPTURE ---
         const moodMsgs = {
-            'terrible': "Không sao cả, ráng lết qua ngày hôm nay thôi là được rồi!",
-            'bad': "Mệt thì thở hắt ra một cái rồi làm từ từ thôi, nay đừng ép bản thân quá.",
-            'okay': "Bình thường như cân đường hộp sữa. Giữ vững nhịp độ nhé.",
-            'good': "Tâm trạng khá keo! Một khởi đầu tuyệt vời cho ngày hôm nay.",
-            'great': "Năng lượng full cây! Bật mode chiến thần và càn quét deadline thôi!"
+            'terrible': "Hôm nay có vẻ nặng nề. Hãy làm từng việc nhỏ và cho phép bản thân đi chậm lại.",
+            'bad': "Bạn đang hơi mệt. Hãy làm từ từ, đừng ép bản thân quá.",
+            'okay': "Tâm trạng ổn định. Hãy giữ nhịp độ vừa phải nhé.",
+            'good': "Tâm trạng khá tốt. Một khởi đầu thuận lợi cho ngày hôm nay.",
+            'great': "Bạn đang tràn đầy năng lượng! Hãy tận dụng để xử lý những việc quan trọng."
         };
 
         const moodBtns = document.querySelectorAll('.mood-btn');
@@ -812,7 +1463,10 @@
             btn.addEventListener('click', () => {
                 moodBtns.forEach(b => b.classList.remove('selected'));
                 btn.classList.add('selected');
-                moodMsgEl.textContent = moodMsgs[btn.getAttribute('data-mood')];
+                const mood = btn.getAttribute('data-mood');
+                AppState.mood = mood;
+                localStorage.setItem('insight_user_mood', mood);
+                moodMsgEl.textContent = moodMsgs[mood];
             });
         });
 
@@ -839,7 +1493,7 @@
                 group.innerHTML = `
                     <p class="question-text">${index + 1}. ${q.text}</p>
                     <input type="range" min="1" max="5" value="3" class="amps-range">
-                    <div class="slider-labels"><span>Hoàn toàn sai</span> <span>Hoàn toàn đúng</span></div>
+                    <div class="slider-labels"><span>Hoàn toàn không đúng</span> <span>Hoàn toàn đúng</span></div>
                 `;
                 container.appendChild(group);
             });
@@ -850,6 +1504,8 @@
         btnSubmitAmps.addEventListener('click', () => {
             const ranges = document.querySelectorAll('.amps-range');
             let score = 0; ranges.forEach(r => score += parseInt(r.value));
+            AppState.ampsScore = score;
+            localStorage.setItem('insight_amps_score', score);
             
             const resultEl = document.getElementById('amps-result');
             resultEl.style.display = 'block'; resultEl.className = ''; 
@@ -859,59 +1515,407 @@
             
             if (score >= 19) {
                 AppState.maxTasks = 3; resultEl.classList.add('result-high');
-                resultEl.innerHTML = `Điểm Daily: ${score}/25<br><br><b>Hôm nay, "con quái vật cầu toàn" có vẻ đang khá lớn. Hãy thử chuyển sang tab PAUSE và cho bản thân một khoảng nghỉ.</b><br><br><span style="font-size:0.9rem;">Hệ thống đã giới hạn To-do list xuống còn <b>3 nhiệm vụ</b>.</span>`;
-                planSubtitle.innerHTML = "Quy tắc số 3 (Can thiệp AMPS). Bạn đang bị áp lực, hãy cắt giảm kỳ vọng."; taskWarning.innerHTML = "<span style='color:#c0392b;'><i class='fa-solid fa-triangle-exclamation'></i> AMPS Cao: Hôm nay bạn chỉ được phép chọn tối đa 3 nhiệm vụ.</span>";
+                resultEl.innerHTML = `Điểm hôm nay: ${score}/25<br><br><b>Hôm nay mức độ cầu toàn của bạn khá cao. Hãy thử chuyển sang tab Nghỉ ngơi và dành cho bản thân một khoảng nghỉ.</b><br><br><span style="font-size:0.9rem;">Hệ thống đã giới hạn danh sách việc xuống còn <b>3 nhiệm vụ</b>.</span>`;
+                planSubtitle.innerHTML = "Quy tắc 3 việc (điều chỉnh theo kết quả AMPS). Hôm nay hãy giảm bớt kỳ vọng và chọn ít việc hơn."; 
+                taskWarning.innerHTML = "<span style='color:#c0392b;'><i class='fa-solid fa-triangle-exclamation'></i> Mức AMPS cao: hôm nay nên chọn tối đa 3 nhiệm vụ.</span>";
             } else if (score >= 12) {
                 AppState.maxTasks = 5; resultEl.classList.add('result-medium');
-                resultEl.innerHTML = `Điểm Daily: ${score}/25<br><br><b>Có vẻ "con quái vật cầu toàn" đang xuất hiện một chút 👀</b><br><br><span style="font-size:0.9rem;">To-do list vẫn mở khóa <b>5 nhiệm vụ</b>, nhưng hãy làm việc thư giãn nhẹ nhàng nhé.</span>`;
-                planSubtitle.innerHTML = "Quy tắc số 5 (The Power of 5). Giới hạn nhiệm vụ để chống trì hoãn."; taskWarning.innerHTML = "Chỉ chọn 5 việc quan trọng nhất ngày hôm nay.";
+                resultEl.innerHTML = `Điểm hôm nay: ${score}/25<br><br><b>Bạn có vẻ đang hơi khắt khe với bản thân.</b><br><br><span style="font-size:0.9rem;">Bạn vẫn có thể chọn <b>5 nhiệm vụ</b>, hãy làm việc nhẹ nhàng, không cần hoàn hảo.</span>`;
+                planSubtitle.innerHTML = "Quy tắc 5 việc: giới hạn nhiệm vụ để tránh quá tải và dễ bắt đầu."; 
+                taskWarning.innerHTML = "Chỉ chọn 5 việc quan trọng nhất ngày hôm nay.";
             } else {
                 AppState.maxTasks = 5; resultEl.classList.add('result-low');
-                resultEl.innerHTML = `Điểm Daily: ${score}/25<br><br><b>Hôm nay, bạn đang khá nhẹ nhàng với chính mình 🌱</b><br><br><span style="font-size:0.9rem;">Trạng thái tinh thần rất tuyệt! To-do list <b>5 nhiệm vụ</b> đã mở khóa.</span>`;
-                planSubtitle.innerHTML = "Quy tắc số 5 (The Power of 5). Giới hạn nhiệm vụ để chống trì hoãn."; taskWarning.innerHTML = "Chỉ chọn 5 việc quan trọng nhất ngày hôm nay.";
+                resultEl.innerHTML = `Điểm hôm nay: ${score}/25<br><br><b>Hôm nay, bạn đang khá nhẹ nhàng với chính mình 🌱</b><br><br><span style="font-size:0.9rem;">Bạn đang khá thoải mái. Bạn có thể chọn tối đa <b>5 nhiệm vụ</b>.</span>`;
+                planSubtitle.innerHTML = "Quy tắc 5 việc: giới hạn nhiệm vụ để tránh quá tải và dễ bắt đầu."; 
+                taskWarning.innerHTML = "Chỉ chọn 5 việc quan trọng nhất ngày hôm nay.";
             }
-            updateTaskCounterUI(); btnSubmitAmps.innerText = "Đang chuyển sang Plan...";
-            setTimeout(() => { goToTab('plan'); btnSubmitAmps.innerText = "Phân tích & Lên kế hoạch"; }, 2500);
+            updateTaskCounterUI(); 
+            btnSubmitAmps.innerText = "Đang chuyển sang Kế hoạch...";
+            setTimeout(() => { goToTab('plan'); btnSubmitAmps.innerText = "Xem kết quả & lập kế hoạch"; }, 2500);
         });
 
-        // --- 2. PLAN LOGIC ---
-        const btnAddTask = document.getElementById('btn-add-task');
+        // --- 2. SMART SCHEDULING ENGINE & PLAN MODULE ---
+        
+        // Time helper utilities
+        function timeToMinutes(timeStr) {
+            if(!timeStr) return 0;
+            const [h, m] = timeStr.split(':').map(Number);
+            return h * 60 + m;
+        }
+
+        function minutesToTime(mins) {
+            mins = Math.floor(mins);
+            const h = Math.floor(mins / 60) % 24;
+            const m = mins % 60;
+            return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
+        }
+
+        // --- SEPARATE CORE SCHEDULING ALGORITHM ---
+        const SmartScheduler = {
+            /**
+             * Pure algorithm to schedule tasks into available slots
+             * respecting fixed activities, deadlines, breaks, and energy heuristics.
+             */
+            generate({ tasks, startTimeStr, endTimeStr, fixedActivities, userEnergyScore }) {
+                const dayStartMin = timeToMinutes(startTimeStr);
+                const dayEndMin = timeToMinutes(endTimeStr);
+
+                // 1. Sort & merge fixed busy intervals
+                const busyIntervals = fixedActivities
+                    .map(act => ({
+                        start: timeToMinutes(act.start),
+                        end: timeToMinutes(act.end),
+                        name: act.name,
+                        type: 'fixed'
+                    }))
+                    .filter(act => act.end > dayStartMin && act.start < dayEndMin)
+                    .sort((a, b) => a.start - b.start);
+
+                // 2. Identify available free continuous slots
+                let freeSlots = [];
+                let currentPointer = dayStartMin;
+
+                for (let busy of busyIntervals) {
+                    const bStart = Math.max(dayStartMin, busy.start);
+                    const bEnd = Math.min(dayEndMin, busy.end);
+                    if (bStart > currentPointer) {
+                        freeSlots.push({ start: currentPointer, end: bStart });
+                    }
+                    if (bEnd > currentPointer) {
+                        currentPointer = bEnd;
+                    }
+                }
+                if (currentPointer < dayEndMin) {
+                    freeSlots.push({ start: currentPointer, end: dayEndMin });
+                }
+
+                // 3. Rank tasks based on Deadline, Priority, Difficulty, and User Energy
+                // Only consider tasks not yet completed
+                const pendingTasks = tasks.map((t, idx) => ({ ...t, originalIndex: idx }));
+
+                const priorityWeights = { 'high': 30, 'medium': 20, 'low': 10 };
+                const diffWeights = { 'hard': 15, 'medium': 10, 'easy': 5 };
+
+                pendingTasks.sort((a, b) => {
+                    // Deadline urgency first
+                    const dlA = a.deadline ? timeToMinutes(a.deadline) : 9999;
+                    const dlB = b.deadline ? timeToMinutes(b.deadline) : 9999;
+                    if (dlA !== dlB) return dlA - dlB;
+
+                    // Weighted score based on user state
+                    let scoreA = (priorityWeights[a.priority] || 20) + (diffWeights[a.difficulty] || 10);
+                    let scoreB = (priorityWeights[b.priority] || 20) + (diffWeights[b.difficulty] || 10);
+
+                    // If energy is low (AMPS high or bad mood), prioritize easier/manageable tasks first
+                    if (userEnergyScore < 0) {
+                        scoreA -= (diffWeights[a.difficulty] || 10) * 2;
+                        scoreB -= (diffWeights[b.difficulty] || 10) * 2;
+                    }
+
+                    return scoreB - scoreA;
+                });
+
+                // 4. Allocation with Break buffer (15 min standard)
+                const scheduledItems = [];
+                const unscheduledTasks = [];
+                const BREAK_DURATION = 15;
+
+                for (let task of pendingTasks) {
+                    if (task.completed) continue; // completed tasks excluded from future slots
+
+                    let allocated = false;
+                    const taskDuration = parseInt(task.time);
+
+                    for (let slot of freeSlots) {
+                        const slotCapacity = slot.end - slot.start;
+                        if (slotCapacity >= taskDuration) {
+                            // Check deadline constraint
+                            const plannedEnd = slot.start + taskDuration;
+                            const taskDl = task.deadline ? timeToMinutes(task.deadline) : null;
+
+                            if (taskDl && plannedEnd > taskDl) {
+                                // Exceeds deadline in this slot
+                                continue;
+                            }
+
+                            // Allocate task here
+                            scheduledItems.push({
+                                type: 'task',
+                                name: task.name,
+                                start: slot.start,
+                                end: plannedEnd,
+                                duration: taskDuration,
+                                priority: task.priority,
+                                difficulty: task.difficulty,
+                                originalIndex: task.originalIndex
+                            });
+
+                            // Insert regular break if slot still has space and not end of day
+                            const nextStartWithBreak = plannedEnd + BREAK_DURATION;
+                            if (nextStartWithBreak <= slot.end) {
+                                scheduledItems.push({
+                                    type: 'break',
+                                    name: 'Nghỉ ngơi hồi phục',
+                                    start: plannedEnd,
+                                    end: nextStartWithBreak,
+                                    duration: BREAK_DURATION
+                                });
+                                slot.start = nextStartWithBreak;
+                            } else {
+                                slot.start = plannedEnd;
+                            }
+
+                            allocated = true;
+                            break;
+                        }
+                    }
+
+                    if (!allocated) {
+                        let reason = 'Không đủ khoảng trống liên tục trước giờ kết thúc';
+                        if (task.deadline) {
+                            const dlMin = timeToMinutes(task.deadline);
+                            if (dlMin < dayStartMin + taskDuration) {
+                                reason = `Deadline (${task.deadline}) quá gấp, không đủ thời gian học`;
+                            }
+                        }
+                        unscheduledTasks.push({ task, reason });
+                    }
+                }
+
+                // Merge fixed activities into timeline presentation
+                busyIntervals.forEach(b => {
+                    scheduledItems.push({
+                        type: 'fixed',
+                        name: b.name,
+                        start: b.start,
+                        end: b.end,
+                        duration: b.end - b.start
+                    });
+                });
+
+                // Sort chronological
+                scheduledItems.sort((a, b) => a.start - b.start);
+
+                return {
+                    timeline: scheduledItems,
+                    unscheduled: unscheduledTasks,
+                    freeSlots
+                };
+            }
+        };
+
+        // --- PLAN UI CONTROLLERS ---
         const inputTaskName = document.getElementById('task-name');
         const inputTaskTime = document.getElementById('task-time');
+        const inputTaskDl = document.getElementById('task-deadline');
+        const inputTaskPriority = document.getElementById('task-priority');
+        const inputTaskDiff = document.getElementById('task-difficulty');
+        const btnAddTask = document.getElementById('btn-add-task');
         const taskListUI = document.getElementById('task-list-ui');
         const taskCounterEl = document.getElementById('task-counter');
-        const scheduleControls = document.getElementById('schedule-controls'); 
+        const scheduleControls = document.getElementById('schedule-controls');
         const btnGenSchedule = document.getElementById('btn-generate-schedule');
-        
+        const timelineContainer = document.getElementById('timeline-container');
+        const unscheduledContainer = document.getElementById('unscheduled-container');
+
+        // Extra details collapsible toggle
+        const btnToggleExtra = document.getElementById('btn-toggle-extra-fields');
+        const extraFieldsBox = document.getElementById('extra-fields-box');
+        btnToggleExtra.addEventListener('click', () => {
+            const isOpen = extraFieldsBox.classList.toggle('open');
+            btnToggleExtra.innerHTML = isOpen 
+                ? '<i class="fa-solid fa-angle-down"></i> Thu gọn chi tiết' 
+                : '<i class="fa-solid fa-angle-right"></i> Thêm Deadline, Ưu tiên & Độ khó';
+        });
+
+        // Routine Config Panel toggle
+        const btnToggleRoutine = document.getElementById('btn-toggle-routine');
+        const routinePanel = document.getElementById('routine-config-panel');
+        btnToggleRoutine.addEventListener('click', () => {
+            const isHidden = routinePanel.style.display === 'none';
+            routinePanel.style.display = isHidden ? 'block' : 'none';
+        });
+
+        // Fixed Activities Management
+        const fixedActName = document.getElementById('fixed-act-name');
+        const fixedActStart = document.getElementById('fixed-act-start');
+        const fixedActEnd = document.getElementById('fixed-act-end');
+        const btnAddFixedAct = document.getElementById('btn-add-fixed-act');
+        const fixedActListUI = document.getElementById('fixed-activities-list');
+        const startTimeInput = document.getElementById('schedule-start-time');
+        const endTimeInput = document.getElementById('schedule-end-time');
+
+        function loadSavedPlanSettings() {
+            try {
+                const savedRoutines = localStorage.getItem('insight_fixed_activities');
+                if (savedRoutines) AppState.fixedActivities = JSON.parse(savedRoutines);
+                
+                const savedBounds = localStorage.getItem('insight_day_bounds');
+                if (savedBounds) {
+                    const bounds = JSON.parse(savedBounds);
+                    AppState.startTime = bounds.start || '08:00';
+                    AppState.endTime = bounds.end || '21:30';
+                    startTimeInput.value = AppState.startTime;
+                    endTimeInput.value = AppState.endTime;
+                }
+
+                const savedTasks = localStorage.getItem('insight_tasks_list');
+                if (savedTasks) AppState.tasks = JSON.parse(savedTasks);
+            } catch(e) {}
+            renderFixedActivities();
+            renderTaskList();
+            updateAvailabilitySummary();
+            updateTaskCounterUI();
+        }
+
+        function savePlanSettings() {
+            localStorage.setItem('insight_fixed_activities', JSON.stringify(AppState.fixedActivities));
+            localStorage.setItem('insight_day_bounds', JSON.stringify({
+                start: startTimeInput.value,
+                end: endTimeInput.value
+            }));
+            localStorage.setItem('insight_tasks_list', JSON.stringify(AppState.tasks));
+            updateAvailabilitySummary();
+        }
+
+        startTimeInput.addEventListener('change', () => { AppState.startTime = startTimeInput.value; savePlanSettings(); });
+        endTimeInput.addEventListener('change', () => { AppState.endTime = endTimeInput.value; savePlanSettings(); });
+
+        btnAddFixedAct.addEventListener('click', () => {
+            const name = fixedActName.value.trim() || 'Sinh hoạt cá nhân';
+            const start = fixedActStart.value;
+            const end = fixedActEnd.value;
+            if (timeToMinutes(start) >= timeToMinutes(end)) {
+                alert(window.t("Giờ kết thúc phải sau giờ bắt đầu!"));
+                return;
+            }
+            AppState.fixedActivities.push({ id: Date.now(), name, start, end });
+            fixedActName.value = '';
+            renderFixedActivities();
+            savePlanSettings();
+        });
+
+        window.deleteFixedAct = function(id) {
+            AppState.fixedActivities = AppState.fixedActivities.filter(a => a.id !== id);
+            renderFixedActivities();
+            savePlanSettings();
+        };
+
+        function renderFixedActivities() {
+            fixedActListUI.innerHTML = '';
+            AppState.fixedActivities.forEach(act => {
+                const span = document.createElement('span');
+                span.className = 'pill-badge';
+                span.innerHTML = `<span><b>${act.name}</b> (${act.start} - ${act.end})</span> <i class="fa-solid fa-xmark" onclick="deleteFixedAct(${act.id})"></i>`;
+                fixedActListUI.appendChild(span);
+            });
+            updateAvailabilitySummary();
+        }
+
+        function updateAvailabilitySummary() {
+            const text = document.getElementById('summary-hours-text');
+            const count = document.getElementById('summary-fixed-count');
+            if (text) text.textContent = `${startTimeInput.value} - ${endTimeInput.value}`;
+            if (count) count.textContent = `${AppState.fixedActivities.length} lịch cố định`;
+        }
+
+        // --- TASK CRUD ---
         let editingIndex = -1;
 
         function updateTaskCounterUI() {
             taskCounterEl.textContent = `(${AppState.tasks.length}/${AppState.maxTasks})`;
             if(AppState.tasks.length >= AppState.maxTasks && editingIndex === -1) {
-                btnAddTask.disabled = true; btnAddTask.innerHTML = "Đã đạt giới hạn";
+                btnAddTask.disabled = true; 
+                btnAddTask.innerHTML = "Đã đạt giới hạn";
             } else {
-                btnAddTask.disabled = false; btnAddTask.innerHTML = editingIndex > -1 ? "Cập nhật nhiệm vụ" : "Thêm nhiệm vụ";
+                btnAddTask.disabled = false; 
+                btnAddTask.innerHTML = editingIndex > -1 ? "Cập nhật nhiệm vụ" : "Thêm nhiệm vụ";
             }
             scheduleControls.style.display = AppState.tasks.length > 0 ? 'block' : 'none';
         }
 
         btnAddTask.addEventListener('click', () => {
-            const name = inputTaskName.value.trim(); const time = parseInt(inputTaskTime.value);
-            if(name === '') return;
-            if (editingIndex > -1) { AppState.tasks[editingIndex] = { name, time }; editingIndex = -1; } 
-            else { if(AppState.tasks.length >= AppState.maxTasks) return; AppState.tasks.push({ name, time }); }
-            inputTaskName.value = ''; renderTaskList(); updateTaskCounterUI();
+            const name = inputTaskName.value.trim();
+            const time = parseInt(inputTaskTime.value);
+            const deadline = inputTaskDl.value;
+            const priority = inputTaskPriority.value;
+            const difficulty = inputTaskDiff.value;
+
+            if (name === '') return;
+
+            const taskObj = {
+                name,
+                time,
+                deadline,
+                priority,
+                difficulty,
+                completed: false
+            };
+
+            if (editingIndex > -1) {
+                taskObj.completed = AppState.tasks[editingIndex].completed;
+                AppState.tasks[editingIndex] = taskObj;
+                editingIndex = -1;
+            } else {
+                if(AppState.tasks.length >= AppState.maxTasks) return;
+                AppState.tasks.push(taskObj);
+            }
+
+            inputTaskName.value = '';
+            renderTaskList();
+            updateTaskCounterUI();
+            savePlanSettings();
         });
 
-        window.editTask = function(index) { editingIndex = index; const task = AppState.tasks[index]; inputTaskName.value = task.name; inputTaskTime.value = task.time; updateTaskCounterUI(); };
-        window.deleteTask = function(index) { AppState.tasks.splice(index, 1); if(editingIndex === index) { editingIndex = -1; inputTaskName.value = ''; } else if (editingIndex > index) { editingIndex--; } renderTaskList(); updateTaskCounterUI(); };
+        window.toggleTaskCompleted = function(idx) {
+            AppState.tasks[idx].completed = !AppState.tasks[idx].completed;
+            renderTaskList();
+            savePlanSettings();
+        };
+
+        window.editTask = function(index) {
+            editingIndex = index;
+            const task = AppState.tasks[index];
+            inputTaskName.value = task.name;
+            inputTaskTime.value = task.time;
+            if (task.deadline) inputTaskDl.value = task.deadline;
+            if (task.priority) inputTaskPriority.value = task.priority;
+            if (task.difficulty) inputTaskDiff.value = task.difficulty;
+            extraFieldsBox.classList.add('open');
+            btnToggleExtra.innerHTML = '<i class="fa-solid fa-angle-down"></i> Thu gọn chi tiết';
+            updateTaskCounterUI();
+        };
+
+        window.deleteTask = function(index) {
+            AppState.tasks.splice(index, 1);
+            if(editingIndex === index) { 
+                editingIndex = -1; 
+                inputTaskName.value = ''; 
+            } else if (editingIndex > index) { 
+                editingIndex--; 
+            }
+            renderTaskList();
+            updateTaskCounterUI();
+            savePlanSettings();
+        };
 
         function renderTaskList() {
             taskListUI.innerHTML = '';
             AppState.tasks.forEach((task, index) => {
-                const li = document.createElement('li'); li.className = 'task-item';
+                const li = document.createElement('li');
+                li.className = `task-item ${task.completed ? 'completed' : ''}`;
+                
+                const priorityLabels = { 'high': 'Ưu tiên Cao', 'medium': 'Ưu tiên Vừa', 'low': 'Ưu tiên Thấp' };
+                const priorityClass = `tag-priority-${task.priority || 'medium'}`;
+
                 li.innerHTML = `
-                    <div class="task-info"><span style="font-weight: 500;">${index + 1}. ${task.name}</span><span class="task-time-badge">${task.time} phút</span></div>
+                    <div class="task-info">
+                        <input type="checkbox" class="task-checkbox" ${task.completed ? 'checked' : ''} onchange="toggleTaskCompleted(${index})" title="Đánh dấu hoàn thành">
+                        <span class="task-title" style="font-weight: 500;">${index + 1}. ${task.name}</span>
+                        <span class="task-time-badge">${task.time} phút</span>
+                        <span class="tag-badge ${priorityClass}">${priorityLabels[task.priority] || 'Ưu tiên Vừa'}</span>
+                        ${task.deadline ? `<span style="font-size:0.75rem; color: var(--color-text-light);"><i class="fa-regular fa-clock"></i> ${task.deadline}</span>` : ''}
+                    </div>
                     <div class="task-actions">
                         <button class="action-btn" onclick="editTask(${index})" title="Sửa"><i class="fa-solid fa-pen"></i></button>
                         <button class="action-btn delete-btn" onclick="deleteTask(${index})" title="Xóa"><i class="fa-solid fa-trash"></i></button>
@@ -920,41 +1924,167 @@
             });
         }
 
-        btnGenSchedule.addEventListener('click', () => {
-            const timelineContainer = document.getElementById('timeline-container'); timelineContainer.innerHTML = '';
-            const startTimeInput = document.getElementById('schedule-start-time').value;
-            if(!startTimeInput) { alert("Vui lòng chọn thời gian bắt đầu!"); return; }
+        // Render timeline output
+        function renderTimeline(timeline, container) {
+            container.innerHTML = '';
+            if (timeline.length === 0) {
+                container.innerHTML = `<p style="text-align:center; color: #aaa; margin-top: 30px;">Không có ca học nào trong thời gian này.</p>`;
+                return;
+            }
 
-            const [startHours, startMinutes] = startTimeInput.split(':').map(Number);
-            let currentTime = new Date(); currentTime.setHours(startHours, startMinutes, 0, 0);
-            function formatTime(date) { return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); }
+            timeline.forEach(item => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = `timeline-item ${item.type === 'break' ? 'timeline-break' : ''} ${item.type === 'fixed' ? 'timeline-fixed' : ''}`;
+                const startStr = minutesToTime(item.start);
+                const endStr = minutesToTime(item.end);
 
-            AppState.tasks.forEach((task, idx) => {
-                let startTimeStr = formatTime(currentTime); currentTime.setMinutes(currentTime.getMinutes() + task.time); 
-                let endTimeStr = formatTime(currentTime);
-                
-                const taskDiv = document.createElement('div'); taskDiv.className = 'timeline-item';
-                taskDiv.innerHTML = `<strong>${startTimeStr} - ${endTimeStr}</strong><br><span>${task.name}</span>`;
-                timelineContainer.appendChild(taskDiv);
+                let badgeHtml = '';
+                if (item.type === 'fixed') badgeHtml = '<span style="font-size:0.75rem; color:#e67e22; margin-left:6px; font-weight:600;">(Cố định)</span>';
+                else if (item.type === 'task') badgeHtml = `<span style="font-size:0.75rem; color:var(--color-accent); margin-left:6px;">(${item.duration}p)</span>`;
 
-                if (idx < AppState.tasks.length - 1) {
-                    currentTime.setMinutes(currentTime.getMinutes() + 15); 
-                    const breakDiv = document.createElement('div'); breakDiv.className = 'timeline-item timeline-break';
-                    breakDiv.innerHTML = `Nghỉ ngơi / Vươn vai (15m)`; timelineContainer.appendChild(breakDiv);
-                }
+                itemDiv.innerHTML = `
+                    <strong>${startStr} - ${endStr}</strong> ${badgeHtml}<br>
+                    <span>${item.name}</span>
+                `;
+                container.appendChild(itemDiv);
             });
-            btnGenSchedule.textContent = "Đã cập nhật Timeline!";
-            setTimeout(() => { btnGenSchedule.textContent = "Tạo Lịch Trình Tự Động"; }, 2000);
+        }
+
+        // Compute energy heuristic based on captured mood & AMPS score
+        function getUserEnergyContext() {
+            let energyFactor = 0;
+            if (AppState.mood === 'great' || AppState.mood === 'good') energyFactor += 10;
+            if (AppState.mood === 'bad' || AppState.mood === 'terrible') energyFactor -= 15;
+            if (AppState.ampsScore >= 19) energyFactor -= 15; // High stress perfectionism
+            return energyFactor;
+        }
+
+        btnGenSchedule.addEventListener('click', () => {
+            const startVal = startTimeInput.value;
+            const endVal = endTimeInput.value;
+
+            if (timeToMinutes(startVal) >= timeToMinutes(endVal)) {
+                alert(window.t("Giờ kết thúc mong muốn phải sau giờ bắt đầu!"));
+                return;
+            }
+
+            const result = SmartScheduler.generate({
+                tasks: AppState.tasks,
+                startTimeStr: startVal,
+                endTimeStr: endVal,
+                fixedActivities: AppState.fixedActivities,
+                userEnergyScore: getUserEnergyContext()
+            });
+
+            AppState.generatedSchedule = result.timeline;
+            renderTimeline(result.timeline, timelineContainer);
+
+            // Display unscheduled tasks if any
+            if (result.unscheduled && result.unscheduled.length > 0) {
+                unscheduledContainer.style.display = 'block';
+                unscheduledContainer.className = 'unscheduled-box';
+                let listHtml = `<strong style="color:#c0392b;"><i class="fa-solid fa-circle-exclamation"></i> Nhiệm vụ chưa thể xếp vào lịch:</strong><ul style="margin-top:6px; padding-left:18px;">`;
+                result.unscheduled.forEach(u => {
+                    listHtml += `<li><b>${u.task.name}</b>: ${u.reason}</li>`;
+                });
+                listHtml += `</ul>`;
+                unscheduledContainer.innerHTML = listHtml;
+            } else {
+                unscheduledContainer.style.display = 'none';
+            }
+
+            btnGenSchedule.innerHTML = `<i class="fa-solid fa-check"></i> Đã tối ưu hóa lịch!`;
+            setTimeout(() => { 
+                btnGenSchedule.innerHTML = `<i class="fa-solid fa-wand-magic-sparkles"></i> Đề xuất Lịch học thông minh`; 
+            }, 2000);
         });
 
-        // --- 3. LEARN LOGIC (Cards & Clock & Background Timer) ---
+        // --- 4. RESCHEDULE (SẮP XẾP LẠI TỪ THỜI ĐIỂM HIỆN TẠI) ---
+        const btnQuickReschedule = document.getElementById('btn-quick-reschedule');
+        const rescheduleModal = document.getElementById('reschedule-modal');
+        const previewTimelineEl = document.getElementById('reschedule-preview-timeline');
+        const btnCancelReschedule = document.getElementById('btn-cancel-reschedule');
+        const btnConfirmReschedule = document.getElementById('btn-confirm-reschedule');
+
+        let pendingCalculatedSchedule = null;
+
+        btnQuickReschedule.addEventListener('click', () => {
+            const now = new Date();
+            const currentHours = now.getHours().toString().padStart(2, '0');
+            const currentMins = now.getMinutes().toString().padStart(2, '0');
+            const currentTimeStr = `${currentHours}:${currentMins}`;
+
+            const endVal = endTimeInput.value;
+            if (timeToMinutes(currentTimeStr) >= timeToMinutes(endVal)) {
+                alert(window.t("Đã qua giờ kết thúc của ngày hôm nay. Hãy nới rộng giờ kết thúc để tiếp tục xếp lịch!"));
+                return;
+            }
+
+            // Run scheduling from current moment
+            const result = SmartScheduler.generate({
+                tasks: AppState.tasks,
+                startTimeStr: currentTimeStr,
+                endTimeStr: endVal,
+                fixedActivities: AppState.fixedActivities,
+                userEnergyScore: getUserEnergyContext()
+            });
+
+            pendingCalculatedSchedule = result;
+            renderTimeline(result.timeline, previewTimelineEl);
+
+            rescheduleModal.style.display = 'flex';
+            setTimeout(() => {
+                rescheduleModal.style.opacity = '1';
+                rescheduleModal.style.pointerEvents = 'auto';
+            }, 10);
+        });
+
+        btnCancelReschedule.addEventListener('click', () => {
+            rescheduleModal.style.opacity = '0';
+            rescheduleModal.style.pointerEvents = 'none';
+            setTimeout(() => { rescheduleModal.style.display = 'none'; }, 300);
+        });
+
+        btnConfirmReschedule.addEventListener('click', () => {
+            if (pendingCalculatedSchedule) {
+                AppState.generatedSchedule = pendingCalculatedSchedule.timeline;
+                renderTimeline(pendingCalculatedSchedule.timeline, timelineContainer);
+                
+                if (pendingCalculatedSchedule.unscheduled.length > 0) {
+                    unscheduledContainer.style.display = 'block';
+                    unscheduledContainer.className = 'unscheduled-box';
+                    let listHtml = `<strong style="color:#c0392b;"><i class="fa-solid fa-circle-exclamation"></i> Chưa thể xếp:</strong><ul style="margin-top:6px; padding-left:18px;">`;
+                    pendingCalculatedSchedule.unscheduled.forEach(u => {
+                        listHtml += `<li><b>${u.task.name}</b>: ${u.reason}</li>`;
+                    });
+                    listHtml += `</ul>`;
+                    unscheduledContainer.innerHTML = listHtml;
+                } else {
+                    unscheduledContainer.style.display = 'none';
+                }
+            }
+            btnCancelReschedule.click();
+        });
+
+        // Initialize Plan data
+        loadSavedPlanSettings();
+
+        // --- 3. LEARN LOGIC ---
         const learnCards = document.querySelectorAll('.learn-card');
 
         learnCards.forEach(card => {
             card.addEventListener('click', (e) => {
                 if (e.target.closest('.info-btn')) {
+                    e.stopPropagation();
                     const info = card.querySelector('.learn-card-info');
-                    info.classList.toggle('show'); e.stopPropagation(); return; 
+                    const isCurrentlyShown = info.classList.contains('show');
+                    
+                    document.querySelectorAll('.learn-card-info').forEach(el => el.classList.remove('show'));
+                    
+                    if (!isCurrentlyShown) {
+                        info.classList.add('show');
+                    }
+                    return; 
                 }
                 learnCards.forEach(c => c.classList.remove('active'));
                 card.classList.add('active');
@@ -965,7 +2095,6 @@
             });
         });
 
-        // Vẽ vạch trên đồng hồ kim
         const clockFace = document.getElementById('clock-face');
         for (let i = 0; i < 60; i++) {
             const mark = document.createElement('div');
@@ -978,10 +2107,10 @@
             
             if (i % 5 === 0) {
                 tick.style.width = '2px'; tick.style.height = '12px';
-                tick.style.background = 'rgba(44, 62, 80, 0.6)'; tick.style.marginLeft = '-1px';
+                tick.style.background = 'var(--tick-major)'; tick.style.marginLeft = '-1px';
             } else {
                 tick.style.width = '1px'; tick.style.height = '5px';
-                tick.style.background = 'rgba(127, 140, 141, 0.3)'; tick.style.marginLeft = '-0.5px';
+                tick.style.background = 'var(--tick-minor)'; tick.style.marginLeft = '-0.5px';
             }
             mark.appendChild(tick); clockFace.appendChild(mark);
         }
@@ -1003,7 +2132,6 @@
         }
         drawClock();
 
-        // Background-safe Timer Logic
         let currentLearnMode = 'pomodoro';
         let timerInterval = null;
         let isWorkingPhase = true;
@@ -1084,7 +2212,6 @@
             }
         }
 
-        // --- SESSION POPUP AND BREAK MODE ---
         function showSessionPopup() {
             const popup = document.getElementById('session-popup');
             const title = document.getElementById('popup-title');
@@ -1179,8 +2306,6 @@
             resetTimerVisuals();
         });
 
-        // ------------------------------------
-
         function handlePhaseComplete() {
             timeRemaining = 0;
             updateTimerRing();
@@ -1190,7 +2315,6 @@
             saveTimerState();
 
             if (currentLearnMode === 'flowtime') return;
-            
             showSessionPopup();
         }
 
@@ -1208,7 +2332,7 @@
                 }, 500);
 
                 btnTimerToggle.innerHTML = '<i class="fa-solid fa-pause"></i> Tạm dừng';
-                timerStatus.innerHTML = '<i class="fa-solid fa-water"></i> Đang trôi theo Flowtime (Bấm giờ tiến)';
+                timerStatus.innerHTML = '<i class="fa-solid fa-water"></i> Đang ở chế độ Flowtime (đếm lên)';
             } else {
                 endTime = resumeEndTime ? resumeEndTime : (Date.now() + timeRemaining * 1000);
                 saveTimerState();
@@ -1226,7 +2350,7 @@
                 }, 500);
 
                 btnTimerToggle.innerHTML = '<i class="fa-solid fa-pause"></i> Tạm dừng';
-                timerStatus.innerHTML = '<i class="fa-solid fa-briefcase"></i> Đang ở chế độ Focus';
+                timerStatus.innerHTML = '<i class="fa-solid fa-briefcase"></i> Đang tập trung';
             }
         }
 
@@ -1261,7 +2385,7 @@
                 digitalClock.textContent = formatTimeText(timeElapsed);
                 
                 btnTimerToggle.innerHTML = '<i class="fa-solid fa-play"></i> Bắt đầu Flow';
-                timerStatus.innerHTML = 'Đang trong trạng thái Flow. Làm việc đến khi bạn thấy cần nghỉ.';
+                timerStatus.innerHTML = 'Làm việc cho đến khi bạn thấy cần nghỉ.';
             } else {
                 progressSvg.style.opacity = '1';
                 timerControls.style.display = 'block';
@@ -1272,7 +2396,7 @@
                 digitalClock.textContent = formatTimeText(timeRemaining);
                 timerRing.style.strokeDashoffset = 0;
                 timerRing.style.stroke = 'var(--color-text)'; 
-                btnTimerToggle.innerHTML = '<i class="fa-solid fa-play"></i> Bắt đầu Focus';
+                btnTimerToggle.innerHTML = '<i class="fa-solid fa-play"></i> Bắt đầu tập trung';
                 timerStatus.innerHTML = '';
             }
             saveTimerState();
@@ -1305,7 +2429,7 @@
                         digitalClock.textContent = formatTimeText(timeElapsed);
                         if(timeElapsed === 0) {
                              btnTimerToggle.innerHTML = '<i class="fa-solid fa-play"></i> Bắt đầu Flow';
-                             timerStatus.innerHTML = 'Đang trong trạng thái Flow. Làm việc đến khi bạn thấy cần nghỉ.';
+                             timerStatus.innerHTML = 'Làm việc cho đến khi bạn thấy cần nghỉ.';
                         } else {
                              btnTimerToggle.innerHTML = '<i class="fa-solid fa-play"></i> Tiếp tục Flow';
                              timerStatus.innerHTML = '<i class="fa-solid fa-pause"></i> Đã tạm dừng Flow';
@@ -1355,10 +2479,10 @@
                     updateTimerRing();
                     digitalClock.textContent = formatTimeText(timeRemaining);
                     if (timeRemaining === totalDuration) {
-                        btnTimerToggle.innerHTML = '<i class="fa-solid fa-play"></i> Bắt đầu Focus';
+                        btnTimerToggle.innerHTML = '<i class="fa-solid fa-play"></i> Bắt đầu tập trung';
                         timerStatus.innerHTML = '';
                     } else if (timeRemaining <= 0) {
-                        btnTimerToggle.innerHTML = '<i class="fa-solid fa-play"></i> Bắt đầu Focus'; 
+                        btnTimerToggle.innerHTML = '<i class="fa-solid fa-play"></i> Bắt đầu tập trung'; 
                         handlePhaseComplete();
                     } else {
                         btnTimerToggle.innerHTML = '<i class="fa-solid fa-play"></i> Tiếp tục';
@@ -1381,7 +2505,7 @@
         
         loadTimerState();
 
-        // --- 4. PAUSE LOGIC (Ambient Synths & Canvas) ---
+        // --- 4. PAUSE LOGIC ---
         const breatheInstruction = document.getElementById('breathe-instruction');
         const breatheTexts = ["Hít vào...", "Giữ...", "Thở ra..."];
         setInterval(() => {
@@ -1507,14 +2631,198 @@
         });
 
         const btnShatter = document.getElementById('btn-shatter');
-        const affirmations = [ '"Ném hết bực tức vào thùng rác rồi đó, chill đi!"', '"Xóa sổ mớ deadline trong đầu, thở phào nhẹ nhõm."', '"Giấy nháp vứt đi thì lấy tờ khác vẽ, không gì phải xoắn!"', '"Căng thẳng đã bay màu. Sạc lại năng lượng thôi!"' ];
+        const affirmations = [ '"Đã xóa xong. Hãy hít một hơi sâu và thả lỏng đôi vai."', '"Hãy để những lo lắng trôi đi, bạn đã làm đủ tốt rồi."', '"Tờ giấy trống mới đang chờ bạn, không cần vội."', '"Căng thẳng đang giảm dần. Hãy nghỉ thêm một chút nhé."' ];
         const textOverlay = document.getElementById('affirmation-text');
 
         btnShatter.addEventListener('click', () => {
             canvas.classList.add('crumple-anim'); textOverlay.textContent = affirmations[Math.floor(Math.random() * affirmations.length)]; textOverlay.style.color = 'var(--color-text)'; 
-            setTimeout(() => { ctx.clearRect(0, 0, canvas.width, canvas.height); canvas.classList.remove('crumple-anim'); textOverlay.style.color = 'rgba(0,0,0,0.3)'; }, 800); 
+            setTimeout(() => { ctx.clearRect(0, 0, canvas.width, canvas.height); canvas.classList.remove('crumple-anim'); textOverlay.style.color = 'var(--color-text-light)'; }, 800); 
         });
 
+        // --- I18N & BẢNG MÀU ---
+        const PAIRS = [
+            ["INSIGHT – Soi Thấu Tâm Trí, Bật Mood Siêu Focus", "INSIGHT – Clear Your Mind, Boost Deep Focus"],
+            ["Soi Thấu Tâm Trí, Bật Mood Siêu Focus", "Clear Your Mind, Boost Deep Focus"],
+            ["Bắt đầu", "Get started"],
+            ["Daily", "Daily"],
+            ["Plan", "Plan"],
+            ["Learn", "Learn"],
+            ["Pause", "Pause"],
+            ["Cài đặt", "Settings"],
+            ["Ngôn ngữ", "Language"],
+            ["Giao diện", "Appearance"],
+            ["Sáng", "Light"],
+            ["Tối", "Dark"],
+            ["Màu nền", "Background"],
+            ["Cầu vồng pastel (Hài hòa cảm xúc)", "Pastel Aurora (Emotional balance)"],
+            ["Xanh xô thơm (Xoa dịu, giảm stress)", "Sage Green (Calming & de-stressing)"],
+            ["Xanh sương mai (Tập trung, hạ hỏa)", "Mist Blue (Deep focus & cooling)"],
+            ["Tím oải hương (Tĩnh tâm, bớt âu lo)", "Lavender (Serenity & eases anxiety)"],
+            ["Yến mạch ấm (Ấn tượng an toàn, thư thái)", "Warm Oat (Safe, grounding & gentle)"],
+            ["Hồng đào dịu (Khoan dung với chính mình)", "Soft Peach (Self-compassion & warmth)"],
+            ["Khởi động nhẹ nhàng", "A gentle start"],
+            ["Ghi nhận trạng thái của bạn trước khi làm việc.", "Check in with how you feel before you start."],
+            ["\"Hãy bắt đầu từ những bước nhỏ nhất, hoàn thành quan trọng hơn hoàn hảo.\"", "\"Start with the smallest step. Done matters more than perfect.\""],
+            ["Tâm trạng hiện tại của bạn thế nào?", "How are you feeling right now?"],
+            ["Hãy chọn một biểu tượng để bắt đầu.", "Pick an emoji to begin."],
+            ["Kế hoạch học tập thông minh", "Smart Adaptive Plan"],
+            ["Tự động tối ưu lịch trình theo quỹ thời gian rảnh và mức độ tập trung của bạn.", "Automatically optimizes your schedule based on free time and focus level."],
+            ["Khung giờ học & Sinh hoạt cố định", "Daily Bounds & Fixed Routines"],
+            ["Tùy chỉnh khung giờ", "Customize hours"],
+            ["Bắt đầu ngày học:", "Start of day:"],
+            ["Kết thúc mong muốn:", "Target end:"],
+            ["Hoạt động cố định (Học trường, ca làm, sinh hoạt):", "Fixed activities (School, shifts, daily routine):"],
+            ["+ Thêm", "+ Add"],
+            ["Thời gian khả dụng:", "Available window:"],
+            ["lịch cố định", "fixed routines"],
+            ["Danh sách nhiệm vụ", "Task List"],
+            ["Sắp xếp lại lịch", "Reschedule"],
+            ["Thêm Deadline, Ưu tiên & Độ khó", "Add Deadline, Priority & Difficulty"],
+            ["Thu gọn chi tiết", "Collapse details"],
+            ["Mức ưu tiên:", "Priority:"],
+            ["Độ khó:", "Difficulty:"],
+            ["Cao", "High"],
+            ["Vừa", "Medium"],
+            ["Thấp", "Low"],
+            ["Khó (Đòi hỏi tập trung)", "Hard (High focus)"],
+            ["Vừa phải", "Moderate"],
+            ["Nhẹ nhàng", "Light"],
+            ["Thêm nhiệm vụ", "Add task"],
+            ["Cập nhật nhiệm vụ", "Update task"],
+            ["Đã đạt giới hạn", "Limit reached"],
+            ["Đề xuất Lịch học thông minh", "Generate Smart Schedule"],
+            ["Lịch trình thông minh", "Smart Timeline"],
+            ["Tự động tối ưu", "Auto-optimized"],
+            ["Nghỉ ngơi hồi phục", "Recharge Break"],
+            ["Xem trước Lịch điều chỉnh", "Preview Rescheduled Plan"],
+            ["Hệ thống đã tính toán lại từ thời điểm hiện tại, tôn trọng lịch cố định và các nhiệm vụ chưa xong.", "Recalculated from right now, respecting fixed routines and unfinished tasks."],
+            ["Hủy", "Cancel"],
+            ["Xác nhận áp dụng", "Confirm & Apply"],
+            ["Giờ kết thúc phải sau giờ bắt đầu!", "End time must be after start time!"],
+            ["Giờ kết thúc mong muốn phải sau giờ bắt đầu!", "Target end time must be after start time!"]
+        ];
+
+        const PSYCH_PALETTES = {
+            mesh: { c1: 'rgba(169, 209, 186, 0.75)', c2: 'rgba(242, 185, 179, 0.60)', c3: 'rgba(195, 177, 225, 0.50)', c4: 'rgba(174, 198, 207, 0.60)' },
+            sage: { c1: 'rgba(162, 210, 182, 0.85)', c2: 'rgba(195, 230, 212, 0.70)', c3: 'rgba(141, 190, 163, 0.65)', c4: 'rgba(215, 238, 225, 0.80)' },
+            ocean: { c1: 'rgba(168, 205, 226, 0.85)', c2: 'rgba(197, 225, 240, 0.70)', c3: 'rgba(148, 187, 212, 0.65)', c4: 'rgba(215, 236, 247, 0.80)' },
+            lavender: { c1: 'rgba(206, 190, 232, 0.85)', c2: 'rgba(224, 214, 243, 0.70)', c3: 'rgba(186, 168, 219, 0.60)', c4: 'rgba(235, 228, 248, 0.80)' },
+            oat: { c1: 'rgba(230, 218, 200, 0.85)', c2: 'rgba(242, 234, 221, 0.75)', c3: 'rgba(217, 201, 179, 0.65)', c4: 'rgba(247, 241, 232, 0.85)' },
+            peach: { c1: 'rgba(249, 197, 190, 0.85)', c2: 'rgba(253, 220, 215, 0.70)', c3: 'rgba(242, 178, 170, 0.60)', c4: 'rgba(254, 235, 233, 0.80)' }
+        };
+
+        (function () {
+            const norm = s => s.replace(/\s+/g, ' ').trim();
+            const D = new Map(PAIRS.map(([a, b]) => [norm(a), b]));
+            const RX = [[/^Điểm hôm nay: (\d+)\/25$/, "Today's score: $1/25"], [/^(\d+) phút$/, '$1 min'], [/^(\d+) nhiệm vụ$/, '$1 tasks']];
+            const store = k => { try { return localStorage.getItem(k); } catch (e) { return null; } };
+            const save = (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} };
+            
+            let lang = store('insight_lang') === 'en' ? 'en' : 'vi';
+            let themePref = store('insight_theme') === 'dark' ? 'dark' : 'light';
+            let bgTheme = store('insight_bg') || 'mesh';
+
+            function tr(s) {
+                const n = norm(s); if (!n) return s;
+                let o = D.get(n);
+                if (o === undefined) for (const [r, v] of RX) if (r.test(n)) { o = n.replace(r, v); break; }
+                if (o === undefined) { const m = n.match(/^(\d+)\. (.+)$/); if (m && D.has(m[2])) o = m[1] + '. ' + D.get(m[2]); }
+                if (o === undefined) return s;
+                return s.match(/^\s*/)[0] + o + s.match(/\s*$/)[0];
+            }
+            window.t = s => lang === 'en' ? tr(s) : s;
+
+            function procText(n) {
+                if (n.__cur !== undefined && n.data === n.__cur) return;
+                const src = n.data, out = lang === 'en' ? tr(src) : src;
+                n.__vi = src; n.__cur = out; if (out !== src) n.data = out;
+            }
+            function procAttr(el, a) {
+                const v = el.getAttribute(a); if (v === null) return;
+                const k = '__a_' + a, st = el[k]; if (st && st.cur === v) return;
+                const out = lang === 'en' ? tr(v) : v;
+                el[k] = { vi: v, cur: out }; if (out !== v) el.setAttribute(a, out);
+            }
+            function walk(root) {
+                if (root.nodeType === 3) { if (!/^(SCRIPT|STYLE)$/.test(root.parentNode.nodeName)) procText(root); return; }
+                if (root.nodeType !== 1) return;
+                const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, { acceptNode: n => /^(SCRIPT|STYLE)$/.test(n.parentNode.nodeName) ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT });
+                let n; while ((n = w.nextNode())) procText(n);
+                [root, ...root.querySelectorAll('[title],[placeholder]')].forEach(el => { procAttr(el, 'title'); procAttr(el, 'placeholder'); });
+            }
+            const mo = new MutationObserver(ms => ms.forEach(m => {
+                if (m.type === 'childList') m.addedNodes.forEach(walk);
+                else if (m.type === 'characterData') procText(m.target);
+                else procAttr(m.target, m.attributeName);
+            }));
+
+            function setLang(l) {
+                lang = l; save('insight_lang', l); document.documentElement.lang = l;
+                const w = document.createTreeWalker(document.documentElement, NodeFilter.SHOW_TEXT);
+                let n; while ((n = w.nextNode())) {
+                    if (/^(SCRIPT|STYLE)$/.test(n.parentNode.nodeName)) continue;
+                    const src = n.__vi !== undefined && n.data === n.__cur ? n.__vi : n.data;
+                    const out = l === 'en' ? tr(src) : src; n.__vi = src; n.__cur = out; if (n.data !== out) n.data = out;
+                }
+                document.querySelectorAll('[title],[placeholder]').forEach(el => ['title', 'placeholder'].forEach(a => {
+                    const st = el['__a_' + a]; if (!st || el.getAttribute(a) === null) return;
+                    const vi = el.getAttribute(a) === st.cur ? st.vi : el.getAttribute(a);
+                    const out = l === 'en' ? tr(vi) : vi; el['__a_' + a] = { vi, cur: out }; el.setAttribute(a, out);
+                }));
+                document.querySelectorAll('#seg-lang button').forEach(b => b.setAttribute('aria-pressed', b.dataset.lang === l));
+            }
+
+            function applyTheme() {
+                const dark = themePref === 'dark';
+                document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+                document.querySelectorAll('#seg-theme button').forEach(b => b.setAttribute('aria-pressed', b.dataset.themeOpt === themePref));
+            }
+
+            function applyBgPalette(key) {
+                const palette = PSYCH_PALETTES[key] || PSYCH_PALETTES.mesh;
+                const root = document.documentElement;
+                root.style.setProperty('--mesh-c1', palette.c1);
+                root.style.setProperty('--mesh-c2', palette.c2);
+                root.style.setProperty('--mesh-c3', palette.c3);
+                root.style.setProperty('--mesh-c4', palette.c4);
+
+                document.querySelectorAll('.color-swatch').forEach(swatch => {
+                    swatch.classList.toggle('active', swatch.dataset.bgTheme === key);
+                });
+            }
+
+            walk(document.documentElement);
+            mo.observe(document.documentElement, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ['title', 'placeholder'] });
+            
+            if (lang === 'en') setLang('en'); else setLang('vi');
+            applyTheme();
+            applyBgPalette(bgTheme);
+
+            document.querySelectorAll('#seg-lang button').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+            document.querySelectorAll('#seg-theme button').forEach(b => b.addEventListener('click', () => { 
+                themePref = b.dataset.themeOpt; 
+                save('insight_theme', themePref); 
+                applyTheme(); 
+            }));
+
+            document.querySelectorAll('.color-swatch').forEach(swatch => {
+                swatch.addEventListener('click', () => {
+                    const chosen = swatch.dataset.bgTheme;
+                    bgTheme = chosen;
+                    save('insight_bg', chosen);
+                    applyBgPalette(chosen);
+                });
+            });
+
+            const sBtn = document.getElementById('settings-btn'), sPop = document.getElementById('settings-pop');
+            const toggleS = open => { sPop.hidden = !open; sBtn.setAttribute('aria-expanded', open); };
+            sBtn.addEventListener('click', e => { e.stopPropagation(); toggleS(sPop.hidden); });
+            document.addEventListener('click', e => { if (!sPop.hidden && !sPop.contains(e.target)) toggleS(false); });
+            document.addEventListener('keydown', e => { if (e.key === 'Escape') toggleS(false); });
+
+            const iBtn = document.getElementById('amps-info-btn'), iBox = document.getElementById('amps-info');
+            iBtn.addEventListener('click', () => { iBox.hidden = !iBox.hidden; iBtn.setAttribute('aria-expanded', !iBox.hidden); });
+        })();
     </script>
 </body>
 </html>
